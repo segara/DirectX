@@ -1,0 +1,26 @@
+for (int i = 0; i < 1000000; i++)
+	counter++;
+
+위 함수를 4개의 thread로 돌렸을때 4000000이 아니라 더 적은 숫자가 나오는데 이는 자원을 공유하기 때문
+
+	counter= 0;
+		thread1 :  0->counter++ ->1
+			thread1 :            1->counter++ -> 2
+                                    thread2 :            1->counter++ -> 2
+                                                           thread3 :            2->counter++ -> 3
+
+mutex 사용
+for (int i = 0; i < 1000000; i++) {
+		m.lock();
+		{
+			counter++;
+		}
+		
+		m.unlock();
+}
+			
+counter= 0;
+		thread1 :  0->counter++ ->1
+			      lock(thread1 :1->counter++ -> 2) unlock
+                                   	                                               lock (thread2 : 2->counter++ -> 3) unlock
+                                                           					lock (thread2 : 3->counter++ -> 4) unlock

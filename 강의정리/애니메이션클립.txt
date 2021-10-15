@@ -1,0 +1,6 @@
+Animation Clip
+	-Channel0 = bone0
+	-Channel1 = bone1
+
+본마다 키프레임이 있고 키프레임은  scale, rotation , translation 으로 구성됨
+

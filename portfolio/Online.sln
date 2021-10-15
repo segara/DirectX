@@ -1,0 +1,92 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.572
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Framework", "Framework\Framework.vcxproj", "{B04101DA-D64C-421F-A47C-72FC4A1D7AF3}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnitTest", "UnitTest\UnitTest.vcxproj", "{9B9106D5-7061-401B-BB08-A3C142F589E8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B04101DA-D64C-421F-A47C-72FC4A1D7AF3} = {B04101DA-D64C-421F-A47C-72FC4A1D7AF3}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Shader", "_Shader", "{F814B269-57D5-49D8-87E0-EC96F5FFD923}"
+	ProjectSection(SolutionItems) = preProject
+		..\_Shaders\00_Global.fx = ..\_Shaders\00_Global.fx
+		..\_Shaders\00_Light.fx = ..\_Shaders\00_Light.fx
+		..\_Shaders\00_Render.fx = ..\_Shaders\00_Render.fx
+		..\..\_Shaders\01_Vertex.fx = ..\..\_Shaders\01_Vertex.fx
+		..\..\_Shaders\05_Triangle.fx = ..\..\_Shaders\05_Triangle.fx
+		..\..\_Shaders\06_Rectangle.fx = ..\..\_Shaders\06_Rectangle.fx
+		..\..\_Shaders\08_World.fx = ..\..\_Shaders\08_World.fx
+		..\..\_Shaders\09_World.fx = ..\..\_Shaders\09_World.fx
+		..\..\_Shaders\11_Texture.fx = ..\..\_Shaders\11_Texture.fx
+		..\_Shaders\12_TextureSampler.fx = ..\_Shaders\12_TextureSampler.fx
+		..\_Shaders\13_Terrain.fx = ..\_Shaders\13_Terrain.fx
+		..\..\_Shaders\14_DebugLine.fx = ..\..\_Shaders\14_DebugLine.fx
+		..\..\_Shaders\15_Terrain_Diffuse.fx = ..\..\_Shaders\15_Terrain_Diffuse.fx
+		..\_Shaders\15_Terrain_Diffuse.fx = ..\_Shaders\15_Terrain_Diffuse.fx
+		..\_Shaders\25_Mesh.fx = ..\_Shaders\25_Mesh.fx
+		..\_Shaders\29_CubeMap.fx = ..\_Shaders\29_CubeMap.fx
+		..\_Shaders\30_CubeSky.fx = ..\_Shaders\30_CubeSky.fx
+		..\_Shaders\38_Model.fx = ..\_Shaders\38_Model.fx
+		..\_Shaders\45_Animation.fx = ..\_Shaders\45_Animation.fx
+		..\_Shaders\48_AnimationTweening.fx = ..\_Shaders\48_AnimationTweening.fx
+		..\_Shaders\49_AnimationBlending.fx = ..\_Shaders\49_AnimationBlending.fx
+		..\_Shaders\50_Instancing.fx = ..\_Shaders\50_Instancing.fx
+		..\_Shaders\51_InstancingMesh.fx = ..\_Shaders\51_InstancingMesh.fx
+		..\_Shaders\52_InstancingModel.fx = ..\_Shaders\52_InstancingModel.fx
+		..\_Shaders\53_InstancingAnimation.fx = ..\_Shaders\53_InstancingAnimation.fx
+		..\_Shaders\54_Render.fx = ..\_Shaders\54_Render.fx
+		..\_Shaders\60_RawBuffer.fx = ..\_Shaders\60_RawBuffer.fx
+		..\_Shaders\62_Render2D.fx = ..\_Shaders\62_Render2D.fx
+		..\_Shaders\62_TextureBuffer.fx = ..\_Shaders\62_TextureBuffer.fx
+		..\_Shaders\63_GetAnimationBone.fx = ..\_Shaders\63_GetAnimationBone.fx
+		..\_Shaders\71_GetMultiBones.fx = ..\_Shaders\71_GetMultiBones.fx
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ModelEditor", "ModelEditor\ModelEditor.vcxproj", "{13D047FE-EC19-4CCC-802D-F800DDF376CD}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B04101DA-D64C-421F-A47C-72FC4A1D7AF3} = {B04101DA-D64C-421F-A47C-72FC4A1D7AF3}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B04101DA-D64C-421F-A47C-72FC4A1D7AF3}.Debug|x64.ActiveCfg = Debug|x64
+		{B04101DA-D64C-421F-A47C-72FC4A1D7AF3}.Debug|x64.Build.0 = Debug|x64
+		{B04101DA-D64C-421F-A47C-72FC4A1D7AF3}.Debug|x86.ActiveCfg = Debug|Win32
+		{B04101DA-D64C-421F-A47C-72FC4A1D7AF3}.Debug|x86.Build.0 = Debug|Win32
+		{B04101DA-D64C-421F-A47C-72FC4A1D7AF3}.Release|x64.ActiveCfg = Release|x64
+		{B04101DA-D64C-421F-A47C-72FC4A1D7AF3}.Release|x64.Build.0 = Release|x64
+		{B04101DA-D64C-421F-A47C-72FC4A1D7AF3}.Release|x86.ActiveCfg = Release|Win32
+		{B04101DA-D64C-421F-A47C-72FC4A1D7AF3}.Release|x86.Build.0 = Release|Win32
+		{9B9106D5-7061-401B-BB08-A3C142F589E8}.Debug|x64.ActiveCfg = Debug|x64
+		{9B9106D5-7061-401B-BB08-A3C142F589E8}.Debug|x64.Build.0 = Debug|x64
+		{9B9106D5-7061-401B-BB08-A3C142F589E8}.Debug|x86.ActiveCfg = Debug|Win32
+		{9B9106D5-7061-401B-BB08-A3C142F589E8}.Debug|x86.Build.0 = Debug|Win32
+		{9B9106D5-7061-401B-BB08-A3C142F589E8}.Release|x64.ActiveCfg = Release|x64
+		{9B9106D5-7061-401B-BB08-A3C142F589E8}.Release|x64.Build.0 = Release|x64
+		{9B9106D5-7061-401B-BB08-A3C142F589E8}.Release|x86.ActiveCfg = Release|Win32
+		{9B9106D5-7061-401B-BB08-A3C142F589E8}.Release|x86.Build.0 = Release|Win32
+		{13D047FE-EC19-4CCC-802D-F800DDF376CD}.Debug|x64.ActiveCfg = Debug|x64
+		{13D047FE-EC19-4CCC-802D-F800DDF376CD}.Debug|x64.Build.0 = Debug|x64
+		{13D047FE-EC19-4CCC-802D-F800DDF376CD}.Debug|x86.ActiveCfg = Debug|Win32
+		{13D047FE-EC19-4CCC-802D-F800DDF376CD}.Debug|x86.Build.0 = Debug|Win32
+		{13D047FE-EC19-4CCC-802D-F800DDF376CD}.Release|x64.ActiveCfg = Release|x64
+		{13D047FE-EC19-4CCC-802D-F800DDF376CD}.Release|x64.Build.0 = Release|x64
+		{13D047FE-EC19-4CCC-802D-F800DDF376CD}.Release|x86.ActiveCfg = Release|Win32
+		{13D047FE-EC19-4CCC-802D-F800DDF376CD}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {34853F6E-89B9-4970-BC08-1E4F99449E7D}
+	EndGlobalSection
+EndGlobal

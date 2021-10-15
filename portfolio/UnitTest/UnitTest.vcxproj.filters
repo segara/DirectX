@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="GetVerticalRaycast.cpp" />
+    <ClCompile Include="MeshDemo.cpp" />
+    <ClCompile Include="CubeSkyDemo.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="InstancingDemo.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="ThreadDemo.cpp">
+      <Filter>DirectCompute</Filter>
+    </ClCompile>
+    <ClCompile Include="RawBufferDemo.cpp">
+      <Filter>DirectCompute</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureBufferDemo.cpp">
+      <Filter>DirectCompute</Filter>
+    </ClCompile>
+    <ClCompile Include="InstancingFrameworkDemo.cpp">
+      <Filter>Instancing</Filter>
+    </ClCompile>
+    <ClCompile Include="GetAnimationBoneDemo.cpp">
+      <Filter>DirectCompute</Filter>
+    </ClCompile>
+    <ClCompile Include="ViewportDemo.cpp">
+      <Filter>Projection</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectionDemo.cpp">
+      <Filter>Projection</Filter>
+    </ClCompile>
+    <ClCompile Include="GetRayCastDemo.cpp">
+      <Filter>Projection</Filter>
+    </ClCompile>
+    <ClCompile Include="ObbRaycastDemo.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="ObbCollisionDemo.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="GetMultiBoneDemo.cpp">
+      <Filter>DirectCompute</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Main.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="GetVerticalRaycast.h" />
+    <ClInclude Include="MeshDemo.h" />
+    <ClInclude Include="CubeSkyDemo.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="InstancingDemo.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="ThreadDemo.h">
+      <Filter>DirectCompute</Filter>
+    </ClInclude>
+    <ClInclude Include="RawBufferDemo.h">
+      <Filter>DirectCompute</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureBufferDemo.h">
+      <Filter>DirectCompute</Filter>
+    </ClInclude>
+    <ClInclude Include="InstancingFrameworkDemo.h">
+      <Filter>Instancing</Filter>
+    </ClInclude>
+    <ClInclude Include="GetAnimationBoneDemo.h">
+      <Filter>DirectCompute</Filter>
+    </ClInclude>
+    <ClInclude Include="ViewportDemo.h">
+      <Filter>Projection</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectionDemo.h">
+      <Filter>Projection</Filter>
+    </ClInclude>
+    <ClInclude Include="GetRayCastDemo.h">
+      <Filter>Projection</Filter>
+    </ClInclude>
+    <ClInclude Include="ObbRaycastDemo.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="ObbCollisionDemo.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="GetMultiBoneDemo.h">
+      <Filter>DirectCompute</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Objects">
+      <UniqueIdentifier>{3298f3eb-efac-47dc-9c87-c750bd1d0c4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DirectCompute">
+      <UniqueIdentifier>{53123179-586b-476e-99ee-5f2265378054}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Instancing">
+      <UniqueIdentifier>{c6bfc5b4-61c1-4d90-a68c-3255aeea93c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Projection">
+      <UniqueIdentifier>{b9c506e1-e8b4-4f79-abf6-91e4ae905c6b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

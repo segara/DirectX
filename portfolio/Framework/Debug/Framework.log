@@ -1,0 +1,28 @@
+﻿  Framework.cpp
+i:\direct11_gameclass\19_mesh_\online\framework\framework.h(22): warning C4067: 전처리기 지시문 다음에 예기치 않은 토큰이 있습니다. 줄 바꿈 문자가 필요합니다.
+  Terrain.cpp
+  Context.cpp
+  DebugLine.cpp
+  Shader.cpp
+  Texture.cpp
+  D3D.cpp
+  Gui.cpp
+  Keyboard.cpp
+  Mouse.cpp
+  Time.cpp
+  Window.cpp
+  BinaryFile.cpp
+i:\direct11_gameclass\19_mesh_\online\framework\environment\terrain.cpp(42): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+i:\direct11_gameclass\19_mesh_\online\framework\environment\terrain.cpp(181): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+i:\direct11_gameclass\19_mesh_\online\framework\environment\terrain.cpp(183): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  Math.cpp
+  Path.cpp
+  String.cpp
+  Xml.cpp
+  Camera.cpp
+  MoveCamera.cpp
+  Orthographic.cpp
+  Perspective.cpp
+  Projection.cpp
+  Viewport.cpp
+  Framework.vcxproj -> I:\direct11_gameclass\19_Mesh_\Online\Debug\Framework.lib

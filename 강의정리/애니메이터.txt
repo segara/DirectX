@@ -1,0 +1,29 @@
+애니메이션 데이터가 프레임 * 본 정보 로서 데이터량이 크기 때문에 
+constant buffer 로 넘기지 못함
+따라서 텍스쳐에 데이터를 써서 넘긴다.
+이때 행을 키프레임/ 열을 bone 으로 설정
+
+텍스쳐 1픽셀당 최대크기 : R32G32B32A32 bit -> 4byte4byte4byte4byte -> 16byte
+matrix 하나(본의 키 애니메이션 데이터)당 필요한 크기 : float * 16 = 64byte
+
+본데이터 로드시에는 텍스처 픽셀당 16byte씩 들어있으므로 픽셀4개를 읽은 후 하나의  매트릭스로 합쳐야 한다.
+(쓸때는 메모리대로 쭉 써내려가므로 신경쓰지 않아도 됨)
+
+
+키프레임
+0  		|본1 1/4| 본1 2/4 | 본1 3/4 | 본1 4/4| 
+1
+2
+3
+4
+5
+
+쉐이더 코드:
+
+  //indices[i]: 영향을 주는 본 
+        //+0,+1,+2,+3 : 행렬의 1행,2행,3행,4행
+        
+        c0 = TransformsMap.Load(int4(indices[i] * 4 + 0, currFrame[0], clip[0], 0)); 
+        c1 = TransformsMap.Load(int4(indices[i] * 4 + 1, currFrame[0], clip[0], 0));
+        c2 = TransformsMap.Load(int4(indices[i] * 4 + 2, currFrame[0], clip[0], 0));
+        c3 = TransformsMap.Load(int4(indices[i] * 4 + 3, currFrame[0], clip[0], 0));

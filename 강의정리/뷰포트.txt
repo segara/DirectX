@@ -1,0 +1,19 @@
+IA -> VS- > RS ->PS
+
+VS : World , View, Projection
+
+RS : Viewport
+
+3D위치 ->world -> view-> projection -> viewport
+
+Projection : 절두체 공간 변환
+
+Viewport : 절두체공간->정사각형 공간 변환
+
+
+코드에서 Viewport 조정시 
+
+X,y,width,heigh : 변환완료된 2D화면 스크린의 조정(위치, 사이즈)
+
+코드에서 Perspective 조정시
+Fov, minZ, maxZ 조정

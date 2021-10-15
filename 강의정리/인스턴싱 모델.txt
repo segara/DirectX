@@ -1,0 +1,15 @@
+인스턴스 버퍼는 버텍스 버퍼(matrix배열을 넣어줌) 
+new VertexBuffer(.., 슬롯) 
+메쉬클래스의 인스턴싱 되는 위치를 보관하는 vector<transform>에 transform을 추가(각 모델의 위치)
+->인스턴스 버퍼에 해당 데이터를 넣기
+->인스턴스 버퍼는 Render()에서 위에 넣어준 데이터를 쉐이더로 전송->이때 IASetVertexBuffers에서 슬롯을 1로 설정
+->결론적으로 하나의 쉐이더에 instancebuffer와 다른 데이터들이 같이 값을 배치해주는 것임
+->directx 자체적으로 DrawIndexedInstanced를 사용하여 1 슬롯에 배치된 transforms 위치들을 순차적으로 참조하여 렌더링한다
+
+
+인스턴싱 bone / world를 텍스처로 보냄
+
+------------------------------------------------
+                      본트랜스폼->
+인스턴스인덱스
+↓

@@ -1,0 +1,30 @@
+ ipc: process 간의 통신
+       - message map
+       - pipeline
+       - i/o 로 인한 인터럽트가 발생
+
+쓰레드
+함수단위로 실행
+동기 쓰레드 : 쓰레드가 순서대로 정해진 시간만큼 실행
+비동기 쓰레드 : 순서에 상관없이 실행
+컨텍스트 스위칭 : 스레드가 처리되는 시간보다 교체되는 시간이 더 걸리는 상황
+
+window.cpp
+
+하나의 프로세스에 하나의 쓰레드가 실행되는중
+while (true)
+
+	{
+		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
+		{
+			if (msg.message == WM_QUIT)
+				break;
+
+			TranslateMessage(&msg);
+			DispatchMessage(&msg);
+		}
+		else
+		{
+			MainRender();
+		}
+	}

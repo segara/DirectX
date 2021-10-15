@@ -1,0 +1,21 @@
+////그냥 인스턴싱
+struct VertexInput
+{
+    float4 Position : Position;
+    float2 Uv : Uv;
+    float3 Normal : Normal;
+    
+    matrix Transform : Inst1; //Inst:instancing 1: 1번슬롯
+};
+
+////인스턴스 메쉬일때
+struct VertexMesh
+{
+    float4 Position : Position;
+    float2 Uv : Uv;
+    float3 Normal : Normal;
+    
+    matrix Transform : InstTransform; //Inst:instancing
+    
+    uint InstanceID : SV_InstanceID;//인스턴스 아이디: 인스턴스 생성시 아이디를 부여
+};

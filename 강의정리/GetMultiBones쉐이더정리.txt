@@ -1,0 +1,11 @@
+목적: 모든 본의 위치정보를 계산한후 특정 본의 transform을 가져옴
+방법: 
+compute shader 사용,
+기존의 TransformsMap에서 인스턴스 인덱스, 본인덱스를 통해 4*4 행렬을 얻어낸다
+
+
+가로 bone 세로 instance
+dispatch(1,instance,1) => 스레드 그룹은 인스턴싱 개수만큼 생성
+numthread(transforms, 1,1) =>스레드 그룹내의 개수는 트랜스폼 개수만큼 생성 (250개)
+
+최종 스레드 개수 = instance * transforms

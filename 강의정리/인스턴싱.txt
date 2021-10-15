@@ -1,0 +1,31 @@
+드로우콜
+-렌더링 파이프라인을 한번 거치는 과정
+
+코드
+instanceBuffer = new VertexBuffer(worlds, 1000, sizeof(Matrix), 1); //슬롯 1로 지정
+
+인스턴싱 쉐이더
+
+struct VertexInput
+{
+    float4 Position : Position;
+    float2 Uv : Uv;
+    float3 Normal : Normal;
+    
+    matrix Transform : Inst1; //Inst:instancing 1: 1번슬롯
+};
+
+VertexOutput VS(VertexInput input)
+{
+    VertexOutput output;
+    World = input.Transform; //1000개의 위치정보
+    output.Position = WorldPosition(input.Position);
+    output.Position = ViewProjection(output.Position);
+    
+    output.Normal = WorldNormal(input.Normal);
+    
+   
+    output.Uv = input.Uv;
+    
+    return output;
+}

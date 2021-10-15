@@ -1,0 +1,25 @@
+텍스쳐를 지정
+칼라를 지정
+	
+
+	ConstantBuffer* buffer; //버퍼를 할당하고 칼라정보를 입력(ColorDesc)
+	ID3DX11EffectConstantBuffer* sBuffer;
+	
+	ID3DX11EffectShaderResourceVariable* sDiffuseMap;
+	ID3DX11EffectShaderResourceVariable* sSpecularMap;
+	ID3DX11EffectShaderResourceVariable* sNormalMap;
+
+
+//렌더 방식
+
+	wall->Render(); //wall 메터리얼을 쉐이더에 밀어넣고
+	sphere->Render(); //위의 wall로 렌더링
+
+	brick->Render();
+	cylinder->Render();
+
+	stone->Render();
+	cube->Render();
+
+	floor->Render();
+	grid->Render();
