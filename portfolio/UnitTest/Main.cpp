@@ -12,15 +12,13 @@
 #include "ObbRaycastDemo.h"
 #include "ObbCollisionDemo.h"
 #include "GetMultiBoneDemo.h"
+#include "LightingDemo.h"
 
 //#pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console");
 
 void Main::Initialize()
 {
-	//Push(new CubeSkyDemo());
-	//Push(new ProjectionDemo());
-
-	Push(new GetMultiBoneDemo());
+	Push(new LightingDemo());
 }
 
 void Main::Ready()

@@ -44,6 +44,9 @@
     <ClCompile Include="GetMultiBoneDemo.cpp">
       <Filter>DirectCompute</Filter>
     </ClCompile>
+    <ClCompile Include="LightingDemo.cpp">
+      <Filter>Lighting</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h" />
@@ -89,6 +92,9 @@
     <ClInclude Include="GetMultiBoneDemo.h">
       <Filter>DirectCompute</Filter>
     </ClInclude>
+    <ClInclude Include="LightingDemo.h">
+      <Filter>Lighting</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Objects">
@@ -102,6 +108,9 @@
     </Filter>
     <Filter Include="Projection">
       <UniqueIdentifier>{b9c506e1-e8b4-4f79-abf6-91e4ae905c6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lighting">
+      <UniqueIdentifier>{2fc05adb-4b84-444d-b863-b355f3cf72ad}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

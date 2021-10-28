@@ -94,7 +94,7 @@ void Material::Diffuse(float r, float g, float b, float a)
 
 void Material::Emissive(Color & color)
 {
-	color = colorDesc.Emissive;
+	colorDesc.Emissive = color;
 }
 
 void Material::Emissive(float r, float g, float b, float a)

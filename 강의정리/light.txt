@@ -1,0 +1,10 @@
+Ambient:태양광
+Diffuse:물체 자체의 표현(텍스쳐, 색,음영),램버트
+Specular:하이라이트 부분,퐁 : dot(Reverse Light , Eye) -> Pow(dot결과값, x)  
+Emmisive:외곽 라이팅 (림라이트)
+
+N dot L : Light 방향과 Normal 방향이 반대이므로 Light 에 -1을 곱해줌 
+
+Specular Map : 흰색일수록 강하게 효과
+
+온라인이미지 만들기 : normalamp online <- 구글검색
