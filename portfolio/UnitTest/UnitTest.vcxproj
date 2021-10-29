@@ -34,6 +34,7 @@
     <ClCompile Include="PointLightingDemo.cpp" />
     <ClCompile Include="ProjectionDemo.cpp" />
     <ClCompile Include="RawBufferDemo.cpp" />
+    <ClCompile Include="SpotLightingDemo.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -60,6 +61,7 @@
     <ClInclude Include="PointLightingDemo.h" />
     <ClInclude Include="ProjectionDemo.h" />
     <ClInclude Include="RawBufferDemo.h" />
+    <ClInclude Include="SpotLightingDemo.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="TextureBufferDemo.h" />
     <ClInclude Include="ThreadDemo.h" />

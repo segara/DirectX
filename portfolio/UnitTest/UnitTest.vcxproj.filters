@@ -50,6 +50,9 @@
     <ClCompile Include="PointLightingDemo.cpp">
       <Filter>Lighting</Filter>
     </ClCompile>
+    <ClCompile Include="SpotLightingDemo.cpp">
+      <Filter>Lighting</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h" />
@@ -99,6 +102,9 @@
       <Filter>Lighting</Filter>
     </ClInclude>
     <ClInclude Include="PointLightingDemo.h">
+      <Filter>Lighting</Filter>
+    </ClInclude>
+    <ClInclude Include="SpotLightingDemo.h">
       <Filter>Lighting</Filter>
     </ClInclude>
   </ItemGroup>

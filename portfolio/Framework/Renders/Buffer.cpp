@@ -122,7 +122,10 @@ void ConstantBuffer::Render()
 	D3D11_MAPPED_SUBRESOURCE subresource;
 	//map : write
 	//데이터의 업데이트
-	//buffer(gpu) 시작주소 를 가져와서 subresource.pData 로 넣어줌
+	//buffer(gpu) 시작주소 를  subresource.pData 로 넣어줌
+	//위의 주소에 data를 밀어넣음
+	//이후 작업이 완료된 해당 buffer를 쉐이더에 연결시킴
+	//이후 쉐이더에서는 해당정보를 통해 계산에 활용
 	D3D::GetDC()->Map(buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &subresource);
 
 	{

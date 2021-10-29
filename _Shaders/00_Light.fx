@@ -151,7 +151,7 @@ void ComputePointLights(inout MaterialDesc output, float3 normal, float3 wPositi
         
         result.Ambient = PointLights[i].Ambient * Material.Ambient;
         
-        float NdotL = dot(light, normalize(normal)); //조명방향과 노멀의 dot계산
+        float NdotL = dot(light, normalize(normal)); //조명위치와 vertex노멀이 이루는 벡터, vertex노멀벡터 dot계산
         float3 E = normalize(ViewPosition() - wPosition);
 
         [flatten]
@@ -182,7 +182,99 @@ void ComputePointLights(inout MaterialDesc output, float3 normal, float3 wPositi
         //(dist / PointLights[i].Range) : 실제거리/조명범위
         //1.0f/(거리비율) : 가까울수록 값이 크고  멀어질수록 값이 작아지게
         float temp = 1.0f / saturate(dist / PointLights[i].Range);
-        float att = temp * temp * (1.0f / max(1.0f - PointLights[i].intensity, 1e-8f));
+        float att = temp * temp * (1.0f / max(1.0f - PointLights[i].intensity, 1e-8f)); // 1e-8f : 0에 최대한 가까운수
+        
+        //result.Ambient * temp; <= 특별한 의미는 없음
+        output.Ambient += result.Ambient * temp;
+        output.Diffuse += result.Diffuse * att;
+        output.Specular += result.Specular * att;
+        output.Emissive += result.Emissive * att;
+    }
+
+}
+
+#define MAX_SPOT_LIGHTS 256
+struct SpotLight
+{
+    float4 Ambient;
+    float4 Diffuse;
+    float4 Specular;
+    float4 Emissive;
+    
+    float3 Position;
+    float Range;
+    
+    float3 Direction;
+    float Angle;
+    
+    float intensity;
+    float3 Padding;
+};
+
+cbuffer CB_SpotLights
+{
+    uint SpotLightCount;
+    float3 CB_SpotLights_Padding;
+    
+    SpotLight SpotLights[MAX_SPOT_LIGHTS];
+};
+
+void ComputeSpotLights(inout MaterialDesc output, float3 normal, float3 wPosition)
+{
+    output = MakeMaterial();
+    MaterialDesc result = MakeMaterial();
+    
+  
+    for (uint i = 0; i < SpotLightCount; i++)
+    {
+        float3 light = SpotLights[i].Position - wPosition;
+        float dist = length(light);
+        
+        [flatten]
+        if (dist > SpotLights[i].Range)
+            continue;
+        
+        light /= dist; //방향벡터를 크기로 나눈다. normalize
+        
+        
+        result.Ambient = SpotLights[i].Ambient * Material.Ambient;
+        
+        float NdotL = dot(light, normalize(normal)); //조명위치와 vertex노멀이 이루는 벡터, vertex노멀벡터 dot계산
+        float3 E = normalize(ViewPosition() - wPosition);
+
+        [flatten]
+        if (NdotL > 0.0f)
+        {
+            result.Diffuse = Material.Diffuse * NdotL * SpotLights[i].Diffuse;
+        
+            [flatten]
+            if (Material.Specular.a > 0.0f)
+            {
+                float3 R = normalize(reflect(-light, normal));
+                float RdotE = saturate(dot(R, E));
+            
+                float specular = pow(RdotE, Material.Specular.a);
+                result.Specular = Material.Specular * specular * SpotLights[i].Specular;
+            }
+        }
+    
+        [flatten]
+        if (Material.Emissive.a > 0.0f)
+        {
+            float NdotE = dot(E, normalize(normal));
+            float emissive = smoothstep(1.0f - Material.Emissive.a, 1.0f, 1.0f - saturate(NdotE));
+        
+            result.Emissive = Material.Emissive * emissive * SpotLights[i].Emissive;
+        }
+        //spot light
+        //point light에서 라이트의 빛이 퍼지는 모양이 원형태에서 원뿔형태로 바뀜
+        // 조명과 vertex가 만드는 vector, 조명의 vector 를 내적 : 두vector 가 멀어질수록 감소
+        // point light에서는 조명위치-vertex노멀 벡터와 vertex노멀벡터를 내적해줬지만
+        // spot light에서는 (조명의 direction 벡터)와 (조명위치-vertex노멀 벡터)를 내적
+        // pow를 사용하면 빛의 감소가 곡선형태로 일어난다
+        //http://telnet.or.kr/directx/graphics/programmingguide/fixedfunction/lightsandmaterials/spotlightmodel.htm 그래프 참조
+        float temp = pow(saturate(dot(-light, SpotLights[i].Direction)), SpotLights[i].Angle);
+        float att = temp * (1.0f / max(1.0f - SpotLights[i].intensity, 1e-8f)); // 1e-8f : 0에 최대한 가까운수
         
         //result.Ambient * temp; <= 특별한 의미는 없음
         output.Ambient += result.Ambient * temp;

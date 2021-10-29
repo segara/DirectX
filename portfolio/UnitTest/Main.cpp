@@ -14,12 +14,13 @@
 #include "GetMultiBoneDemo.h"
 #include "LightingDemo.h"
 #include "PointLightingDemo.h"
+#include "SpotLightingDemo.h"
 
 //#pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console");
 
 void Main::Initialize()
 {
-	Push(new PointLightingDemo());
+	Push(new SpotLightingDemo());
 }
 
 void Main::Ready()

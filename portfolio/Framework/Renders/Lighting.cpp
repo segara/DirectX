@@ -49,3 +49,22 @@ PointLight & Lighting::GetPointLight(UINT index)
 {
 	return pointLights[index];
 }
+
+
+UINT Lighting::SpotLights(OUT SpotLight * lights)
+{
+	memcpy(lights, spotLights, sizeof(SpotLight) * spotLightCount);
+
+	return spotLightCount;
+}
+
+void Lighting::AddSpotLight(SpotLight & light)
+{
+	spotLights[spotLightCount] = light;
+	spotLightCount++;
+}
+
+SpotLight & Lighting::GetSpotLight(UINT index)
+{
+	return spotLights[index];
+}
