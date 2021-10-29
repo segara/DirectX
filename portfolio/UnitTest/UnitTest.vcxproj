@@ -31,6 +31,7 @@
     <ClCompile Include="MeshDemo.cpp" />
     <ClCompile Include="ObbCollisionDemo.cpp" />
     <ClCompile Include="ObbRaycastDemo.cpp" />
+    <ClCompile Include="PointLightingDemo.cpp" />
     <ClCompile Include="ProjectionDemo.cpp" />
     <ClCompile Include="RawBufferDemo.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -56,6 +57,7 @@
     <ClInclude Include="MeshDemo.h" />
     <ClInclude Include="ObbCollisionDemo.h" />
     <ClInclude Include="ObbRaycastDemo.h" />
+    <ClInclude Include="PointLightingDemo.h" />
     <ClInclude Include="ProjectionDemo.h" />
     <ClInclude Include="RawBufferDemo.h" />
     <ClInclude Include="stdafx.h" />

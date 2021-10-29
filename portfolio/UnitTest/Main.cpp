@@ -13,12 +13,13 @@
 #include "ObbCollisionDemo.h"
 #include "GetMultiBoneDemo.h"
 #include "LightingDemo.h"
+#include "PointLightingDemo.h"
 
 //#pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console");
 
 void Main::Initialize()
 {
-	Push(new LightingDemo());
+	Push(new PointLightingDemo());
 }
 
 void Main::Ready()

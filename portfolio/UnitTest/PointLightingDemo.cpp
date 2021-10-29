@@ -1,9 +1,9 @@
 #include "stdafx.h"
-#include "LightingDemo.h"
+#include "PointLightingDemo.h"
 #include "../Framework/Viewer/MoveCamera.h"
 #include "../Framework/Environment/CubeSky.h"
 
-void LightingDemo::Initialize()
+void PointLightingDemo::Initialize()
 {
 	Context::Get()->GetCamera()->RotationDegree(20, 0, 0);
 	Context::Get()->GetCamera()->Position(1, 36, -85);
@@ -12,7 +12,7 @@ void LightingDemo::Initialize()
 	//Performance performance;
 	//performance.Start();
 
-	shader = new Shader(L"75_Lighting.fx");
+	shader = new Shader(L"78_PointLighting.fx");
 
 	//float t = performance.End();
 
@@ -23,10 +23,11 @@ void LightingDemo::Initialize()
 	Kachujin();
 	Colliders();
 	Weapon();
+	CreatePointLight();
 }
 
 
-void LightingDemo::Destroy()
+void PointLightingDemo::Destroy()
 {
 	SafeDelete(shader);
 	//SafeDelete(quad);
@@ -36,8 +37,21 @@ void LightingDemo::Destroy()
 	SafeDelete(cubeSky);
 }
 
-void LightingDemo::Update()
+void PointLightingDemo::Update()
 {
+	PointLight& pointLight = Lighting::Get()->GetPointLight(0);
+	ImGui::Begin("Point Lighting");
+	{
+		ImGui::ColorEdit3("Ambient", pointLight.Ambient);
+		ImGui::ColorEdit3("Diffuse", pointLight.Diffuse);
+		ImGui::ColorEdit3("Specular", pointLight.Specular);
+		ImGui::ColorEdit3("Emissive", pointLight.Emissive);
+
+		ImGui::SliderFloat3("Position", pointLight.Position, -50, 50);
+		ImGui::SliderFloat("Range", &pointLight.Range, 0, 20);
+		ImGui::SliderFloat("Intensity", &pointLight.intensity, 0, 1);
+	}
+	ImGui::End();
 
 	ImGui::SliderFloat3("light Position", Context::Get()->Position(), -10, 10);
 	ImGui::SliderFloat3("light Direction", Context::Get()->Direction(), -1, 1);
@@ -109,7 +123,7 @@ void LightingDemo::Update()
 	weapon->Update();
 }
 
-void LightingDemo::Render()
+void PointLightingDemo::Render()
 {
 	cubeSky->Render();
 
@@ -140,7 +154,7 @@ void LightingDemo::Render()
 	weapon->Render();
 }
 
-void LightingDemo::Airplane()
+void PointLightingDemo::Airplane()
 {
 	airplane = new ModelRender(shader);
 	airplane->ReadMesh(L"B787/Airplane");
@@ -154,7 +168,7 @@ void LightingDemo::Airplane()
 	models.push_back(airplane);
 }
 
-void LightingDemo::Kachujin()
+void PointLightingDemo::Kachujin()
 {
 	kachujin = new ModelAnimator(shader);
 	kachujin->ReadMesh(L"Kachujin/Mesh");
@@ -199,7 +213,7 @@ void LightingDemo::Kachujin()
 	animators.push_back(kachujin);
 }
 
-void LightingDemo::Colliders()
+void PointLightingDemo::Colliders()
 {
 	UINT count = kachujin->GetTransformCount();
 	colliders = new ColliderObject*[count];
@@ -224,7 +238,7 @@ void LightingDemo::Colliders()
 	}
 }
 
-void LightingDemo::Weapon()
+void PointLightingDemo::Weapon()
 {
 	weapon = new ModelRender(shader);
 	weapon->ReadMesh(L"Weapon/Sword");
@@ -243,7 +257,23 @@ void LightingDemo::Weapon()
 	weaponInitTransform->Rotation(0, 0, 1);
 }
 
-void LightingDemo::Mesh()
+void PointLightingDemo::CreatePointLight()
+{
+	PointLight light;
+	light =
+	{
+		Color(0,0,0,1),//ambient
+		Color(0,0,1,1),//diffuse
+		Color(0,0,0.7f,1),//specular
+		Color(0,0,0.7f,1),//emissive
+		Vector3(-30,10,-30),
+		5,
+		0.9f
+	};
+	Lighting::Get()->AddPointLight(light);
+}
+
+void PointLightingDemo::Mesh()
 {
 	//Create Material//
 	floor = new Material(shader);
@@ -311,7 +341,7 @@ void LightingDemo::Mesh()
 	grid->UpdateTransforms();
 }
 
-void LightingDemo::Pass(UINT mesh, UINT model, UINT anim)
+void PointLightingDemo::Pass(UINT mesh, UINT model, UINT anim)
 {
 	for (MeshRender* temp : meshes)
 		temp->Pass(mesh);
