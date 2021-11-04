@@ -41,6 +41,11 @@ float3 WorldNormal(float3 normal)
     return mul(normal, (float3x3) World);
 }
 
+float3 WorldTangent(float3 tangent)
+{
+    return mul(tangent, (float3x3) World);
+}
+
 float3 ViewPosition()
 {
     return ViewInverse._41_42_43;
@@ -94,6 +99,7 @@ struct MeshOutput
     float3 wPosition : Position2; //World Position
     
     float3 Normal : Normal;
+    float3 Tangent : Tangent;
     float2 Uv : Uv;
     float4 Color : Color;
 };

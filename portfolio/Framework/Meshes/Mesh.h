@@ -2,7 +2,7 @@
 class Mesh
 {
 public:
-	typedef VertexTextureNormal MeshVertex;
+	typedef VertexTextureNormalTangent MeshVertex;
 private:
 
 	////Shader->AsMatrix 얻어오는부분이 느리기때문에 미리 받아두는 역할

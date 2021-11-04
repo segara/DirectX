@@ -15,12 +15,13 @@
 #include "LightingDemo.h"
 #include "PointLightingDemo.h"
 #include "SpotLightingDemo.h"
+#include "NormalMappingDemo.h"
 
 //#pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console");
 
 void Main::Initialize()
 {
-	Push(new SpotLightingDemo());
+	Push(new NormalMappingDemo());
 }
 
 void Main::Ready()

@@ -63,7 +63,6 @@ void SpotLightingDemo::Update()
 		ImGui::SliderFloat("SpotLight Intensity", &spotLight.Intensity, 0, 1);
 	}
 
-
 	/*PointLight& pointLight = Lighting::Get()->GetPointLight(0);
 	ImGui::Begin("Point Lighting");
 	{

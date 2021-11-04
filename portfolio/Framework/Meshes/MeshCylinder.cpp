@@ -45,10 +45,14 @@ void MeshCylinder::Create()
 			//윗면 아랫면의 너비가 다르므로, 노말도 각도가 기울어지게 된다 그래서 외적을 사용
 			Vector3 tangent = Vector3(-s, 0.0f, c);
 			float dr = bottom_radius - top_radius;
+			
 			Vector3 biTangent = Vector3(dr * c, -height, dr*s);
+			
 			D3DXVec3Cross(&vertex.Normal, &tangent, &biTangent);
 			 
 			D3DXVec3Normalize(&vertex.Normal, &vertex.Normal);
+
+			vertex.Tangent = tangent;
 
 			v.push_back(vertex);
 		}
@@ -100,9 +104,9 @@ void MeshCylinder::BuildTopCap(vector<MeshVertex>& vertices, vector<UINT>& indic
 		float u = x / height + 0.5f;
 		float v = z / height + 0.5f;
 
-		vertices.push_back(MeshVertex(x, y, z, u, v, 0, 1, 0));
+		vertices.push_back(MeshVertex(x, y, z, u, v, 0, 1, 0, 1, 0, 0));
 	}
-	vertices.push_back(MeshVertex(0, y, 0, 0.5f, 0.5f, 0, 1, 0));
+	vertices.push_back(MeshVertex(0, y, 0, 0.5f, 0.5f, 0, 1, 0, 1, 0, 0));
 	//원통 맨윗줄의 인덱스들과 이어줄것이므로: (vertices.size() -1) - sliceCount
 	//여기에 vertice에서 이미 윗판 중점이 들어갔으므로 추가로 -1
 	UINT baseIndex = vertices.size() - sliceCount - 2;
@@ -132,9 +136,9 @@ void MeshCylinder::BuildBottomCap(vector<MeshVertex>& vertices, vector<UINT>& in
 		float u = (x / height) + 0.5f; //+0.5: uv 좌표로 맞춰준다
 		float v = (z / height) + 0.5f;
 
-		vertices.push_back(MeshVertex(x, y, z, u, v, 0, -1, 0));
+		vertices.push_back(MeshVertex(x, y, z, u, v, 0, -1, 0, -1, 0, 0));
 	}
-	vertices.push_back(MeshVertex(0, y, 0, 0.5f, 0.5f, 0, -1, 0));
+	vertices.push_back(MeshVertex(0, y, 0, 0.5f, 0.5f, 0, -1, 0, -1, 0, 0));
 	UINT baseIndex = vertices.size() - sliceCount - 2;
 	UINT centerIndex = vertices.size() - 1;
 

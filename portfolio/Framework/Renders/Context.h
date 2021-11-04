@@ -41,7 +41,7 @@ private:
 	class Camera* camera;
 
 	Color ambient = Color(0, 0, 0, 1);
-	Color specular = Color(1, 1, 1, 1);
+	Color specular = Color(0, 0, 0, 1);
 	Vector3 direction = Vector3(-1, -1, 1);
 	Vector3 position = Vector3(0, 0, 0);
 };

@@ -104,7 +104,7 @@ void ComputeLight(out MaterialDesc output, float3 normal, float3 wPosition)
         //smoothstep(min,max,X) : X가 min, max 사이에 있어야지만 적용됨 
         
         float emissive = smoothstep(1.0f - Material.Emissive.a, 1.0f, 1.0f - saturate(NdotE));
-        output.Emissive = Material.Emissive * emissive;
+        output.Emissive = Material.Emissive.a * emissive;
     }
 
 }
@@ -264,7 +264,7 @@ void ComputeSpotLights(inout MaterialDesc output, float3 normal, float3 wPositio
             float NdotE = dot(E, normalize(normal));
             float emissive = smoothstep(1.0f - Material.Emissive.a, 1.0f, 1.0f - saturate(NdotE));
         
-            result.Emissive = Material.Emissive * emissive * SpotLights[i].Emissive;
+            result.Emissive = Material.Emissive.a * emissive * SpotLights[i].Emissive;
         }
         //spot light
         //point light에서 라이트의 빛이 퍼지는 모양이 원형태에서 원뿔형태로 바뀜
@@ -283,4 +283,32 @@ void ComputeSpotLights(inout MaterialDesc output, float3 normal, float3 wPositio
         output.Emissive += result.Emissive * att;
     }
 
+}
+
+void NormalMapping(float2 uv, float3 normal, float3 tangent, SamplerState sample)
+{
+    float4 map = NormalMap.Sample(sample, uv);
+    [flatten]
+    if (any(map.rgb) == false) //모든 변수의 값이 0이면 false, 하나라도 0보다 크면 true 
+    {
+        return;
+    }
+    
+    float3 coord = map.rgb * 2.0f - 1.0f; //-1~1 사이값으로 변환
+    
+    //탄젠트 공간
+    float3 Normal = normalize(normal); //vertex normal : Z에 맵핑
+    float3 Tangent = normalize(tangent - dot(tangent, Normal) * Normal); //X에 맵핑
+    float3 BiNormal = cross(Normal, Tangent); //Y에 맵핑
+    
+    float3x3 TBN = float3x3(Tangent, BiNormal, Normal);
+    
+    coord = mul(coord, TBN);
+    
+    Material.Diffuse += saturate(dot(-GlobalLight.Direction, coord)); 
+}
+
+void NormalMapping(float2 uv, float3 normal, float3 tangent)
+{
+    NormalMapping(uv, normal, tangent, LinearSampler);
 }

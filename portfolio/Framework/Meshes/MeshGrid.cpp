@@ -27,6 +27,7 @@ void MeshGrid::Create()
 			MeshVertex vertex;
 			vertex.Position = Vector3((float)x - w, 0, (float)z - h); //¿øÁ¡À» Áß½ÉÀ¸·Î ¸¸µë
 			vertex.Normal = Vector3(0, 1, 0);
+			vertex.Tangent = Vector3(1, 0, 0);
 			vertex.Uv.x = (float)x / (float)(countX - 1) * offset_u; //offsetÀÌ ´Ã¾î³¯¼ö·Ï ÃÎÃÎÇØÁü
 			vertex.Uv.y = (float)z / (float)(countZ- 1) * offset_v;
 			v.push_back(vertex);

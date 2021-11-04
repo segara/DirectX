@@ -18,41 +18,42 @@ void MeshCube::Create()
 	float d = 0.5f;
 	vector<MeshVertex> v;
 
-	//Front
-	v.push_back(MeshVertex(-w, -h, -d, 0, 1, 0, 0, -1));
-	v.push_back(MeshVertex(-w, h, -d, 0, 0, 0, 0, -1));
-	v.push_back(MeshVertex(w, h, -d, 1, 0, 0, 0, -1));
-	v.push_back(MeshVertex(w, -h, -d, 1, 1, 0, 0, -1));
+
+	//Front, TangentÆ÷ÇÔ
+	v.push_back(MeshVertex(-w, -h, -d, 0, 1, 0, 0, -1, 1, 0, 0));
+	v.push_back(MeshVertex(-w, +h, -d, 0, 0, 0, 0, -1, 1, 0, 0));
+	v.push_back(MeshVertex(+w, +h, -d, 1, 0, 0, 0, -1, 1, 0, 0));
+	v.push_back(MeshVertex(+w, -h, -d, 1, 1, 0, 0, -1, 1, 0, 0));
 
 	//Back
-	v.push_back(MeshVertex(-w, -h, d, 1, 1, 0, 0, 1));
-	v.push_back(MeshVertex(w, -h, d, 0, 1, 0, 0, 1));
-	v.push_back(MeshVertex(w, h, d, 0, 0, 0, 0, 1));
-	v.push_back(MeshVertex(-w, h, d, 1, 0, 0, 0, 1));
+	v.push_back(MeshVertex(-w, -h, +d, 1, 1, 0, 0, 1, -1, 0, 0));
+	v.push_back(MeshVertex(+w, -h, +d, 0, 1, 0, 0, 1, -1, 0, 0));
+	v.push_back(MeshVertex(+w, +h, +d, 0, 0, 0, 0, 1, -1, 0, 0));
+	v.push_back(MeshVertex(-w, +h, +d, 1, 0, 0, 0, 1, -1, 0, 0));
 
 	//Top
-	v.push_back(MeshVertex(-w, h, -d, 0, 1, 0, 1, 0));
-	v.push_back(MeshVertex(-w, h, d, 0, 0, 0, 1, 0));
-	v.push_back(MeshVertex(w, h, d, 1, 0, 0, 1, 0));
-	v.push_back(MeshVertex(w, h, -d, 1, 1, 0, 1, 0));
+	v.push_back(MeshVertex(-w, +h, -d, 0, 1, 0, 1, 0, 1, 0, 0));
+	v.push_back(MeshVertex(-w, +h, +d, 0, 0, 0, 1, 0, 1, 0, 0));
+	v.push_back(MeshVertex(+w, +h, +d, 1, 0, 0, 1, 0, 1, 0, 0));
+	v.push_back(MeshVertex(+w, +h, -d, 1, 1, 0, 1, 0, 1, 0, 0));
 
 	//Bottom
-	v.push_back(MeshVertex(-w, -h, -d, 1, 1, 0, -1, 0));
-	v.push_back(MeshVertex(w, -h, -d, 0, 1, 0, -1, 0));
-	v.push_back(MeshVertex(w, -h,  d, 0, 0, 0, -1, 0));
-	v.push_back(MeshVertex(-w, -h,  d, 1, 0, 0, -1, 0));
+	v.push_back(MeshVertex(-w, -h, -d, 1, 1, 0, -1, 0, -1, 0, 0));
+	v.push_back(MeshVertex(+w, -h, -d, 0, 1, 0, -1, 0, -1, 0, 0));
+	v.push_back(MeshVertex(+w, -h, +d, 0, 0, 0, -1, 0, -1, 0, 0));
+	v.push_back(MeshVertex(-w, -h, +d, 1, 0, 0, -1, 0, -1, 0, 0));
 
 	//Left
-	v.push_back(MeshVertex(-w, -h, d, 1, 1, -1, 0, 0));
-	v.push_back(MeshVertex(-w, h, d, 0, 1, -1, 0, 0));
-	v.push_back(MeshVertex(-w, h, -d, 0, 0, -1, 0, 0));
-	v.push_back(MeshVertex(-w, -h, -d, 1, 0, -1, 0, 0));
+	v.push_back(MeshVertex(-w, -h, +d, 0, 1, -1, 0, 0, 0, 0, -1));
+	v.push_back(MeshVertex(-w, +h, +d, 0, 0, -1, 0, 0, 0, 0, -1));
+	v.push_back(MeshVertex(-w, +h, -d, 1, 0, -1, 0, 0, 0, 0, -1));
+	v.push_back(MeshVertex(-w, -h, -d, 1, 1, -1, 0, 0, 0, 0, -1));
 
 	//Right
-	v.push_back(MeshVertex(w, -h, -d, 1, 0, 1, 0, 0));
-	v.push_back(MeshVertex(w, h, -d, 1, 1, 1, 0, 0));
-	v.push_back(MeshVertex(w, h, d, 0, 1, 1, 0, 0));
-	v.push_back(MeshVertex(w, -h, d, 0, 0, 1, 0, 0));
+	v.push_back(MeshVertex(+w, -h, -d, 0, 1, 1, 0, 0, 0, 0, 1));
+	v.push_back(MeshVertex(+w, +h, -d, 0, 0, 1, 0, 0, 0, 0, 1));
+	v.push_back(MeshVertex(+w, +h, +d, 1, 0, 1, 0, 0, 0, 0, 1));
+	v.push_back(MeshVertex(+w, -h, +d, 1, 1, 1, 0, 0, 0, 0, 1));
 	
 
 	vertices = new MeshVertex[v.size()];

@@ -3,6 +3,7 @@ struct VertexMesh
     float4 Position : Position;
     float2 Uv : Uv;
     float3 Normal : Normal;
+    float3 Tangent : Tangent;
     uint InstanceID : SV_InstanceID;
     matrix Transform : Inst1_Transform; //Inst:instancing
     float4 Color : Inst2_Color;
@@ -18,6 +19,7 @@ output.wPosition = output.Position.xyz; \
 output.Position = ViewProjection(output.Position); \
 \
 output.Normal = WorldNormal(input.Normal); \
+output.Tangent = WorldTangent(input.Tangent); \
 \
 output.Uv = input.Uv;\
 output.Color = input.Color;

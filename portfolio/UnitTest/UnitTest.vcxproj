@@ -29,6 +29,7 @@
     <ClCompile Include="LightingDemo.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MeshDemo.cpp" />
+    <ClCompile Include="NormalMappingDemo.cpp" />
     <ClCompile Include="ObbCollisionDemo.cpp" />
     <ClCompile Include="ObbRaycastDemo.cpp" />
     <ClCompile Include="PointLightingDemo.cpp" />
@@ -56,6 +57,7 @@
     <ClInclude Include="LightingDemo.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="MeshDemo.h" />
+    <ClInclude Include="NormalMappingDemo.h" />
     <ClInclude Include="ObbCollisionDemo.h" />
     <ClInclude Include="ObbRaycastDemo.h" />
     <ClInclude Include="PointLightingDemo.h" />

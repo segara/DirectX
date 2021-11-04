@@ -86,41 +86,40 @@ void InstancingDemo::CreateMesh()
 	w = h = d = 0.5f;
 
 	//Front
-	vertices.push_back(Mesh::MeshVertex(-w, -h, -d, 0, 1, 0, 0, -1));
-	vertices.push_back(Mesh::MeshVertex(-w, +h, -d, 0, 0, 0, 0, -1));
-	vertices.push_back(Mesh::MeshVertex(+w, +h, -d, 1, 0, 0, 0, -1));
-	vertices.push_back(Mesh::MeshVertex(+w, -h, -d, 1, 1, 0, 0, -1));
+	vertices.push_back(Mesh::MeshVertex(-w, -h, -d, 0, 1, 0, 0, -1, 1, 0, 0));
+	vertices.push_back(Mesh::MeshVertex(-w, +h, -d, 0, 0, 0, 0, -1, 1, 0, 0));
+	vertices.push_back(Mesh::MeshVertex(+w, +h, -d, 1, 0, 0, 0, -1, 1, 0, 0));
+	vertices.push_back(Mesh::MeshVertex(+w, -h, -d, 1, 1, 0, 0, -1, 1, 0, 0));
 
 	//Back
-	vertices.push_back(Mesh::MeshVertex(-w, -h, +d, 1, 1, 0, 0, 1));
-	vertices.push_back(Mesh::MeshVertex(+w, -h, +d, 0, 1, 0, 0, 1));
-	vertices.push_back(Mesh::MeshVertex(+w, +h, +d, 0, 0, 0, 0, 1));
-	vertices.push_back(Mesh::MeshVertex(-w, +h, +d, 1, 0, 0, 0, 1));
+	vertices.push_back(Mesh::MeshVertex(-w, -h, +d, 1, 1, 0, 0, 1, -1, 0, 0));
+	vertices.push_back(Mesh::MeshVertex(+w, -h, +d, 0, 1, 0, 0, 1, -1, 0, 0));
+	vertices.push_back(Mesh::MeshVertex(+w, +h, +d, 0, 0, 0, 0, 1, -1, 0, 0));
+	vertices.push_back(Mesh::MeshVertex(-w, +h, +d, 1, 0, 0, 0, 1, -1, 0, 0));
 
 	//Top
-	vertices.push_back(Mesh::MeshVertex(-w, +h, -d, 0, 1, 0, 1, 0));
-	vertices.push_back(Mesh::MeshVertex(-w, +h, +d, 0, 0, 0, 1, 0));
-	vertices.push_back(Mesh::MeshVertex(+w, +h, +d, 1, 0, 0, 1, 0));
-	vertices.push_back(Mesh::MeshVertex(+w, +h, -d, 1, 1, 0, 1, 0));
+	vertices.push_back(Mesh::MeshVertex(-w, +h, -d, 0, 1, 0, 1, 0, 1, 0, 0));
+	vertices.push_back(Mesh::MeshVertex(-w, +h, +d, 0, 0, 0, 1, 0, 1, 0, 0));
+	vertices.push_back(Mesh::MeshVertex(+w, +h, +d, 1, 0, 0, 1, 0, 1, 0, 0));
+	vertices.push_back(Mesh::MeshVertex(+w, +h, -d, 1, 1, 0, 1, 0, 1, 0, 0));
 
 	//Bottom
-	vertices.push_back(Mesh::MeshVertex(-w, -h, -d, 1, 1, 0, -1, 0));
-	vertices.push_back(Mesh::MeshVertex(+w, -h, -d, 0, 1, 0, -1, 0));
-	vertices.push_back(Mesh::MeshVertex(+w, -h, +d, 0, 0, 0, -1, 0));
-	vertices.push_back(Mesh::MeshVertex(-w, -h, +d, 1, 0, 0, -1, 0));
+	vertices.push_back(Mesh::MeshVertex(-w, -h, -d, 1, 1, 0, -1, 0, -1, 0, 0));
+	vertices.push_back(Mesh::MeshVertex(+w, -h, -d, 0, 1, 0, -1, 0, -1, 0, 0));
+	vertices.push_back(Mesh::MeshVertex(+w, -h, +d, 0, 0, 0, -1, 0, -1, 0, 0));
+	vertices.push_back(Mesh::MeshVertex(-w, -h, +d, 1, 0, 0, -1, 0, -1, 0, 0));
 
 	//Left
-	vertices.push_back(Mesh::MeshVertex(-w, -h, +d, 0, 1, -1, 0, 0));
-	vertices.push_back(Mesh::MeshVertex(-w, +h, +d, 0, 0, -1, 0, 0));
-	vertices.push_back(Mesh::MeshVertex(-w, +h, -d, 1, 0, -1, 0, 0));
-	vertices.push_back(Mesh::MeshVertex(-w, -h, -d, 1, 1, -1, 0, 0));
+	vertices.push_back(Mesh::MeshVertex(-w, -h, +d, 0, 1, -1, 0, 0, 0, 0, -1));
+	vertices.push_back(Mesh::MeshVertex(-w, +h, +d, 0, 0, -1, 0, 0, 0, 0, -1));
+	vertices.push_back(Mesh::MeshVertex(-w, +h, -d, 1, 0, -1, 0, 0, 0, 0, -1));
+	vertices.push_back(Mesh::MeshVertex(-w, -h, -d, 1, 1, -1, 0, 0, 0, 0, -1));
 
 	//Right
-	vertices.push_back(Mesh::MeshVertex(+w, -h, -d, 0, 1, 1, 0, 0));
-	vertices.push_back(Mesh::MeshVertex(+w, +h, -d, 0, 0, 1, 0, 0));
-	vertices.push_back(Mesh::MeshVertex(+w, +h, +d, 1, 0, 1, 0, 0));
-	vertices.push_back(Mesh::MeshVertex(+w, -h, +d, 1, 1, 1, 0, 0));
-
+	vertices.push_back(Mesh::MeshVertex(+w, -h, -d, 0, 1, 1, 0, 0, 0, 0, 1));
+	vertices.push_back(Mesh::MeshVertex(+w, +h, -d, 0, 0, 1, 0, 0, 0, 0, 1));
+	vertices.push_back(Mesh::MeshVertex(+w, +h, +d, 1, 0, 1, 0, 0, 0, 0, 1));
+	vertices.push_back(Mesh::MeshVertex(+w, -h, +d, 1, 1, 1, 0, 0, 0, 0, 1));
 
 	indices =
 	{

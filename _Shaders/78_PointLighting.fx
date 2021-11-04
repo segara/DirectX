@@ -14,7 +14,8 @@ float4 PS(MeshOutput input) : SV_Target
     ComputeLight(outputDesc, input.Normal, input.wPosition);
     AddMaterial(result, outputDesc);
     
-    ComputePointLights(outputDesc, input.Normal, input.wPosition); //outputDesc은 내부에서 초기화됨
+    //outputDesc은 내부에서 초기화됨
+    ComputePointLights(outputDesc, input.Normal, input.wPosition); 
     AddMaterial(result, outputDesc);
     
     return float4(MaterialToColor(result), 1.0f);

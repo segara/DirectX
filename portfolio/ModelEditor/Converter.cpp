@@ -414,6 +414,11 @@ void Converter::ReadMeshData(aiNode * node, int bone)
 				memcpy(&vertex.Normal, &srcMesh->mNormals[v], sizeof(Vector3));
 			}
 
+			if (srcMesh->HasTangentsAndBitangents())
+			{
+				memcpy(&vertex.Tangent, &srcMesh->mTangents[v], sizeof(Vector3));
+			}
+
 			mesh->Vertices.push_back(vertex);
 			
 		}
