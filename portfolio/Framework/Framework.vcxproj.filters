@@ -157,6 +157,9 @@
     <ClCompile Include="Renders\Lighting.cpp">
       <Filter>Renders</Filter>
     </ClCompile>
+    <ClCompile Include="Objects\Billboard.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Environment\Terrain.h">
@@ -294,6 +297,9 @@
     </ClInclude>
     <ClInclude Include="Renders\Lighting.h">
       <Filter>Renders</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Billboard.h">
+      <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

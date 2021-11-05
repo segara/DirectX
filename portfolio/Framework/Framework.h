@@ -104,3 +104,4 @@ typedef D3DXPLANE Plane;
 #include "Model/ModelAnimator.h"
 
 #include "Objects/Collider.h"
+#include "Objects/Billboard.h"

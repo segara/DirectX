@@ -39,6 +39,7 @@
     <ClCompile Include="Model\ModelClip.cpp" />
     <ClCompile Include="Model\ModelMesh.cpp" />
     <ClCompile Include="Model\ModelRender.cpp" />
+    <ClCompile Include="Objects\Billboard.cpp" />
     <ClCompile Include="Objects\Collider.cpp" />
     <ClCompile Include="Renders\Buffer.cpp" />
     <ClCompile Include="Renders\Context.cpp" />
@@ -85,6 +86,7 @@
     <ClInclude Include="Model\ModelClip.h" />
     <ClInclude Include="Model\ModelMesh.h" />
     <ClInclude Include="Model\ModelRender.h" />
+    <ClInclude Include="Objects\Billboard.h" />
     <ClInclude Include="Objects\Collider.h" />
     <ClInclude Include="Renders\Buffer.h" />
     <ClInclude Include="Renders\Context.h" />

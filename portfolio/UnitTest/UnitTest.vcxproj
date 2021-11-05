@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BillboardDemo.cpp" />
     <ClCompile Include="CubeSkyDemo.cpp" />
     <ClCompile Include="GetAnimationBoneDemo.cpp" />
     <ClCompile Include="GetMultiBoneDemo.cpp" />
@@ -47,6 +48,7 @@
     <ClCompile Include="ViewportDemo.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BillboardDemo.h" />
     <ClInclude Include="CubeSkyDemo.h" />
     <ClInclude Include="GetAnimationBoneDemo.h" />
     <ClInclude Include="GetMultiBoneDemo.h" />
