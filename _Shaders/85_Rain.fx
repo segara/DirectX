@@ -37,10 +37,11 @@ VertexOutput VS(VertexInput input)
     displace.xz /= input.Scale.y * 0.1f; //y scale이 커질수록 x, z 이동이 느려지게
     displace *= Time;
     
-    input.Position.xyz = Origin + (Extent + (input.Position.xyz + displace) % Extent) % Extent - (Extent * 0.5f);
+    input.Position.xyz = Origin + ( (input.Position.xyz + displace) % Extent)  + (Extent * 0.5f);
+    
     //Extent 나머지 값이므로 계속 순환됨
-    //Extent 나머지 값을 한번 더 계산하는 이유 : origin으로 포지션값이 변했으므로 한번 더 나눈값
-    //- (Extent * 0.5f) : origin 이동이후 중심점으로 위치시킴
+    //Extent*0.5 만큼 더해서 공간범위값 윗쪽에서 시작
+
     
     float4 position = WorldPosition(input.Position);
     
