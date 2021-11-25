@@ -1,0 +1,15 @@
+Src : 그릴색 (source)
+Dest : 이미 그려진색 (destination 바닥색)
+
+예) src : src_alpha / dest : inv_src_alpha (= 1-src_alpha)
+
+src_color * src_alpha +(방법 : add)+ dest_color * dest_alpha
+
+source의 alpha가 1이면 뒷색이 완전히 가려질것이다.
+0이면 뒷색만 보일것이다.
+
+위의 계산을 할때
+SrcBlendAlpha : one (알파값을 전부사용 : src_alpha * one)
+DestBlendAlpha : zero (알파값 미사용 : dest_alpha * one)
+
+alpha 물체를 맨 나중에 그린다.  

@@ -20,7 +20,12 @@ void MeshCube::Create()
 
 
 	//Front, Tangent포함
-	v.push_back(MeshVertex(-w, -h, -d, 0, 1, 0, 0, -1, 1, 0, 0));
+	v.push_back(MeshVertex(
+		-w, -h, -d, 
+		0, 1, 
+		0, 0, -1, 
+		1, 0, 0
+	)); //촤측 하단 뒷편 정점
 	v.push_back(MeshVertex(-w, +h, -d, 0, 0, 0, 0, -1, 1, 0, 0));
 	v.push_back(MeshVertex(+w, +h, -d, 1, 0, 0, 0, -1, 1, 0, 0));
 	v.push_back(MeshVertex(+w, -h, -d, 1, 1, 0, 0, -1, 1, 0, 0));

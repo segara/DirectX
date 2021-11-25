@@ -105,3 +105,6 @@ typedef D3DXPLANE Plane;
 
 #include "Objects/Collider.h"
 #include "Objects/Billboard.h"
+
+#include "Environment/Rain.h"
+#include "Environment/Snow.h"

@@ -138,6 +138,57 @@ DepthStencilState DepthEnable_False
 };
 ///////////////////////////////////////////////////////////////////////////////
 
+BlendState AlphaBlend
+{
+    AlphaToCoverageEnable = false;
+    //외각선 깔끔하게 만드는 옵션
+
+    //설명: 메모장 확인
+
+    BlendEnable[0] = true;
+    //렌더타겟 0 에 blend사용
+    SrcBlend[0] = SRC_ALPHA;
+    DestBlend[0] = INV_SRC_ALPHA;
+    BlendOp[0] = ADD;
+
+    SrcBlendAlpha[0] = One;
+    DestBlendAlpha[0] = Zero;
+    BlendOpAlpha[0] = Add;
+
+    RenderTargetWriteMask[0] = 15; //0x0F
+};
+
+BlendState AdditiveBlend
+{
+    AlphaToCoverageEnable = false;
+   
+    BlendEnable[0] = true;
+    SrcBlend[0] = One;
+    DestBlend[0] = One;
+    BlendOp[0] = ADD;
+
+    SrcBlendAlpha[0] = One;
+    DestBlendAlpha[0] = Zero;
+    BlendOpAlpha[0] = Add;
+
+    RenderTargetWriteMask[0] = 15; //0x0F
+};
+
+BlendState AdditiveBlend_AlphaToCoverageEnable
+{
+    AlphaToCoverageEnable = true;
+   
+    BlendEnable[0] = true;
+    SrcBlend[0] = One;
+    DestBlend[0] = One;
+    BlendOp[0] = ADD;
+
+    SrcBlendAlpha[0] = One;
+    DestBlendAlpha[0] = Zero;
+    BlendOpAlpha[0] = Add;
+
+    RenderTargetWriteMask[0] = 15; //0x0F
+};
 
 ///////////////////////////////////////////////////////////////////////////////
 // Vertex / Pixel
