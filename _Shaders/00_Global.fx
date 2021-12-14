@@ -137,6 +137,19 @@ DepthStencilState DepthEnable_False
     DepthEnable = false;
 };
 ///////////////////////////////////////////////////////////////////////////////
+BlendState OpaqueBlend
+{
+    BlendEnable[0] = true;
+    SrcBlend[0] = One;
+    DestBlend[0] = Zero;
+    BlendOp[0] = ADD;
+    
+    SrcBlendAlpha[0] = One;
+    DestBlendAlpha[0] = Zero;
+    BlendOpAlpha[0] = Add;
+    
+    RenderTargetWriteMask[0] = 15; //Ox0F
+};
 
 BlendState AlphaBlend
 {
@@ -188,6 +201,28 @@ BlendState AdditiveBlend_AlphaToCoverageEnable
     BlendOpAlpha[0] = Add;
 
     RenderTargetWriteMask[0] = 15; //0x0F
+};
+
+BlendState AdditiveBlend_Particle
+{
+    AlphaToCoverageEnable = false;
+    
+    BlendEnable[0] = true;
+    SrcBlend[0] = SRC_ALPHA;
+    DestBlend[0] = One;
+    BlendOp[0] = ADD;
+    
+    SrcBlendAlpha[0] = One;
+    DestBlendAlpha[0] = Zero;
+    BlendOpAlpha[0] = Add;
+    
+    RenderTargetWriteMask[0] = 15; //Ox0F
+};
+DepthStencilState DepthRead_Particle
+{
+    DepthEnable = true;
+    DepthFunc = Less_Equal; // Less_Equal:기본값, 깊이가 더 가까우면 그림
+    DepthWriteMask = 0; // 0 : off, 한번에 그려지는 정점간에는 깊이를 비교하지 않고 그림
 };
 
 ///////////////////////////////////////////////////////////////////////////////

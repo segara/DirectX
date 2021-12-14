@@ -2,7 +2,7 @@
 #include "00_Light.fx"
 #include "00_Render.fx"
 
-uint Selected = 3;
+uint Selected = 2;
 
 float4 PS(MeshOutput input) : SV_Target
 {

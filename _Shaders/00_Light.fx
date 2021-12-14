@@ -104,7 +104,7 @@ void ComputeLight(out MaterialDesc output, float3 normal, float3 wPosition)
         //smoothstep(min,max,X) : X가 min, max 사이에 있어야지만 적용됨 
         
         float emissive = smoothstep(1.0f - Material.Emissive.a, 1.0f, 1.0f - saturate(NdotE));
-        output.Emissive = Material.Emissive.a * emissive;
+        output.Emissive = Material.Emissive * emissive;
     }
 
 }
@@ -305,7 +305,7 @@ void NormalMapping(float2 uv, float3 normal, float3 tangent, SamplerState sample
     
     coord = mul(coord, TBN);
     
-    Material.Diffuse += saturate(dot(-GlobalLight.Direction, coord)); 
+    Material.Diffuse *= saturate(dot(-GlobalLight.Direction, coord)); 
 }
 
 void NormalMapping(float2 uv, float3 normal, float3 tangent)
