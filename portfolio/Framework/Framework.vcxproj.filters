@@ -25,6 +25,9 @@
     <Filter Include="Model">
       <UniqueIdentifier>{4d78e8fa-5dea-4038-9c46-708b80c62848}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Particle">
+      <UniqueIdentifier>{9c12e0d5-22c6-48a1-9e4c-13b3ae1a6719}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Environment\Terrain.cpp">
@@ -165,6 +168,9 @@
     </ClCompile>
     <ClCompile Include="Environment\Snow.cpp">
       <Filter>Environment</Filter>
+    </ClCompile>
+    <ClCompile Include="Particle\ParticleSystem.cpp">
+      <Filter>Particle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -312,6 +318,12 @@
     </ClInclude>
     <ClInclude Include="Environment\Snow.h">
       <Filter>Environment</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle\ParticleData.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle\ParticleSystem.h">
+      <Filter>Particle</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

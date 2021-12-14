@@ -43,6 +43,7 @@
     <ClCompile Include="Model\ModelRender.cpp" />
     <ClCompile Include="Objects\Billboard.cpp" />
     <ClCompile Include="Objects\Collider.cpp" />
+    <ClCompile Include="Particle\ParticleSystem.cpp" />
     <ClCompile Include="Renders\Buffer.cpp" />
     <ClCompile Include="Renders\Context.cpp" />
     <ClCompile Include="Renders\DebugLine.cpp" />
@@ -92,6 +93,8 @@
     <ClInclude Include="Model\ModelRender.h" />
     <ClInclude Include="Objects\Billboard.h" />
     <ClInclude Include="Objects\Collider.h" />
+    <ClInclude Include="Particle\ParticleData.h" />
+    <ClInclude Include="Particle\ParticleSystem.h" />
     <ClInclude Include="Renders\Buffer.h" />
     <ClInclude Include="Renders\Context.h" />
     <ClInclude Include="Renders\DebugLine.h" />
@@ -222,7 +225,9 @@
       <Command>copy /Y "$(SolutionDir)Debug\$(ProjectName).lib" "$(SolutionDir)UnitTest"
 copy /Y "$(SolutionDir)Debug\$(ProjectName).pdb" "$(SolutionDir)UnitTest"
 copy /Y "$(SolutionDir)Debug\$(ProjectName).lib" "$(SolutionDir)ModelEditor"
-copy /Y "$(SolutionDir)Debug\$(ProjectName).pdb" "$(SolutionDir)ModelEditor"</Command>
+copy /Y "$(SolutionDir)Debug\$(ProjectName).pdb" "$(SolutionDir)ModelEditor"
+copy /Y "$(SolutionDir)Debug\$(ProjectName).lib" "$(SolutionDir)ParticleEditor"
+copy /Y "$(SolutionDir)Debug\$(ProjectName).pdb" "$(SolutionDir)ParticleEditor"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -271,7 +276,9 @@ copy /Y "$(SolutionDir)Debug\$(ProjectName).pdb" "$(SolutionDir)ModelEditor"</Co
       <Command>copy /Y "$(SolutionDir)Debug\$(ProjectName).lib" "$(SolutionDir)UnitTest"
 copy /Y "$(SolutionDir)Debug\$(ProjectName).pdb" "$(SolutionDir)UnitTest"
 copy /Y "$(SolutionDir)Debug\$(ProjectName).lib" "$(SolutionDir)ModelEditor"
-copy /Y "$(SolutionDir)Debug\$(ProjectName).pdb" "$(SolutionDir)ModelEditor"</Command>
+copy /Y "$(SolutionDir)Debug\$(ProjectName).pdb" "$(SolutionDir)ModelEditor"
+copy /Y "$(SolutionDir)Debug\$(ProjectName).lib" "$(SolutionDir)ParticleEditor"
+copy /Y "$(SolutionDir)Debug\$(ProjectName).pdb" "$(SolutionDir)ParticleEditor"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

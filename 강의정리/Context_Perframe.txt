@@ -1,3 +1,83 @@
 각 모델이나 메쉬는 perframe 멤버를 가지고 있고
 perframe에 쉐이더 정보를 입력
 perframe을 업데이트 돌리면서 context로 부터 라이팅 및 카메라 뷰포트 정보를 받아서 계산해준다
+
+예)
+
+void Mesh::Update()
+{
+	perFrame->Update();
+}
+
+void Mesh::Render(UINT drawCount)
+{
+	if (vertexBuffer == NULL || indexBuffer == NULL)
+	{
+		Create();
+
+		vertexBuffer = new VertexBuffer(vertices, vertexCount, sizeof(MeshVertex));
+		indexBuffer = new IndexBuffer(indices, indexCount);
+	}
+
+	perFrame->Render();
+
+	//vertexBuffer, indexBuffer는 Render()밖에 없음(update 없음)
+	vertexBuffer->Render();
+	indexBuffer->Render();
+
+	D3D::GetDC()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	shader->DrawIndexedInstanced(0, pass, indexCount, drawCount);
+}
+________________________________________________________________________________________________________
+
+void PerFrame::Update()
+{
+	desc.Time = Time::Get()->Running();
+
+	lightDesc.Ambient = Context::Get()->Ambient();
+	lightDesc.Specular = Context::Get()->Specular();
+	lightDesc.Direction = Context::Get()->Direction();
+	lightDesc.Position = Context::Get()->Position();
+
+	pointLightDesc.Count = Lighting::Get()->PointLights(pointLightDesc.Lights);
+	spotLightDesc.Count = Lighting::Get()->SpotLights(spotLightDesc.Lights);
+}
+
+void PerFrame::Render()
+{
+	desc.View = Context::Get()->View();
+	D3DXMatrixInverse(&desc.ViewInverse, NULL, &desc.View);
+	//뷰행렬의 역행렬을 구해줌 : 카메라의 원래 위치, 방향을 알기 위해
+	desc.Projection = Context::Get()->Projection();
+	desc.VP = desc.View * desc.Projection;
+	//모두 ConstantBuffer임
+	buffer->Render();
+	sBuffer->SetConstantBuffer(buffer->Buffer());
+
+	lightBuffer->Render();
+	sLightBuffer->SetConstantBuffer(lightBuffer->Buffer());
+
+	pointLightBuffer->Render();
+	sPointLightBuffer->SetConstantBuffer(pointLightBuffer->Buffer());
+
+	spotLightBuffer->Render();
+	sSpotLightBuffer->SetConstantBuffer(spotLightBuffer->Buffer());
+}
+___________________________________________________________________________________________________________
+void ConstantBuffer::Render()
+{
+	D3D11_MAPPED_SUBRESOURCE subresource;
+	//map : write
+	//데이터의 업데이트
+	//buffer(gpu) 시작주소 를  subresource.pData 로 넣어줌
+	//위의 주소에 data를 밀어넣음
+	//이후 작업이 완료된 해당 buffer를 쉐이더에 연결시킴(Perframe에서)
+	//이후 쉐이더에서는 해당정보를 통해 계산에 활용
+	D3D::GetDC()->Map(buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &subresource);
+
+	{
+		memcpy(subresource.pData, data, dataSize);  
+	}
+
+	D3D::GetDC()->Unmap(buffer, 0);
+}
