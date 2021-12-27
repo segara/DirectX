@@ -4,6 +4,47 @@ perframe을 업데이트 돌리면서 context로 부터 라이팅 및 카메라 
 
 예)
 
+//Perframe.h
+class PerFrame{
+
+struct Desc
+	{
+		Matrix View;
+		Matrix ViewInverse;
+		Matrix Projection;
+		Matrix VP;
+
+		Plane Culling[4];
+		Plane Clipping;
+
+		float Time;
+		float Padding[3];
+	} desc;
+
+
+ID3DX11EffectConstantBuffer* sBuffer;
+
+
+//////////////생성자/////////////////////////
+PerFrame::PerFrame(Shader * shader)
+	: shader(shader)
+{
+	buffer = new ConstantBuffer(&desc, sizeof(Desc));  //Desc구조체로 constantBuffer 생성
+	
+	sBuffer = shader->AsConstantBuffer("CB_PerFrame"); 
+	
+	//global.fx에 "CB_PerFrame"구조체가 있고 ID3DX11EffectConstantBuffer 와 연결
+
+	lightBuffer = new ConstantBuffer(&lightDesc, sizeof(LightDesc));
+	sLightBuffer = shader->AsConstantBuffer("CB_Light");
+
+	pointLightBuffer = new ConstantBuffer(&pointLightDesc, sizeof(PointLightDesc));
+	sPointLightBuffer = shader->AsConstantBuffer("CB_PointLights");
+
+	spotLightBuffer = new ConstantBuffer(&spotLightDesc, sizeof(SpotLightDesc));
+	sSpotLightBuffer = shader->AsConstantBuffer("CB_SpotLights");
+}
+////////////////////////////////////////////////////////////////////////////////
 void Mesh::Update()
 {
 	perFrame->Update();

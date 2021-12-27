@@ -7,23 +7,30 @@ public:
 	struct VertexBillboard
 	{
 		Vector3 Position;
-		Vector2 Uv;
+		//Vector2 Uv;
 		Vector2 Scale;
+		UINT MapIndex;
 	};
 private:
-	VertexBillboard* vertices;
-	UINT* indices;
-	UINT drawCount = 0;
-	UINT preDrawCount = 0;
+	//VertexBillboard* vertices;
+	//UINT* indices;
+	
+	vector<VertexBillboard> vertices;
+	vector<wstring> textureNames;
+	//UINT drawCount = 0;
+	//UINT preDrawCount = 0;
 
-	Texture* texture;
+	TextureArray* textureArray = NULL;
 	ID3DX11EffectShaderResourceVariable* sDiffuseMap;
 public:
-	Billboard(wstring file);
+	Billboard(Shader* shader);
 	~Billboard();
 	void Update();
 	void Render();
 
-	void Add(Vector3& position, Vector2& scale);
+	//void SetTexture(wstring file);
+	void AddTexture(wstring file);
+	/// mapIndex : texture array¿« ¿Œµ¶Ω∫
+	void Add(Vector3& position, Vector2& scale, UINT mapIndex);
 };
 

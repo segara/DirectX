@@ -12,7 +12,7 @@ void BillboardDemo::Initialize()
 	//Performance performance;
 	//performance.Start();
 
-	shader = new Shader(L"82_NormalMapping.fx");
+	shader = new Shader(L"96_Billboard.fx");
 
 
 	//float t = performance.End();
@@ -42,11 +42,12 @@ void BillboardDemo::Destroy()
 
 void BillboardDemo::Update()
 {
-	static UINT selected = 0;
-	ImGui::InputInt("NormalMap Selected", (int *)&selected);
-	selected %= 4;
+	//static UINT selected = 0;
+	//ImGui::InputInt("NormalMap Selected", (int *)&selected);
+	//selected %= 4;
 
-	shader->AsScalar("Selected")->SetInt(selected);
+	//shader->AsScalar("Selected")->SetInt(selected);
+
 	////SpotLight
 	//{
 	//	static UINT spotIndex = 0;
@@ -324,13 +325,33 @@ void BillboardDemo::CreateSpotLight()
 }
 void BillboardDemo::CreateBillboard()
 {
-	billboard = new Billboard(L"Terrain/grass_14.tga");
+	billboard = new Billboard(shader);
+	billboard->Pass(4);
+	billboard->AddTexture(L"Terrain/grass_14.tga");
+	billboard->AddTexture(L"Terrain/grass_07.tga");
+	billboard->AddTexture(L"Terrain/grass_11.tga");
 	for (UINT i = 0; i < 1200; i++)
 	{
 		Vector2 scale = Math::RandomVec2(1, 3);
 		Vector2 position = Math::RandomVec2(-60, 60);
 
-		billboard->Add(Vector3(position.x, scale.y * 0.5f, position.y), scale);
+		billboard->Add(Vector3(position.x, scale.y * 0.5f, position.y), scale,0);
+	}
+
+	for (UINT i = 0; i < 300; i++)
+	{
+		Vector2 scale = Math::RandomVec2(1, 3);
+		Vector2 position = Math::RandomVec2(-60, 60);
+
+		billboard->Add(Vector3(position.x, scale.y * 0.5f, position.y), scale,1);
+	}
+
+	for (UINT i = 0; i < 700; i++)
+	{
+		Vector2 scale = Math::RandomVec2(1, 3);
+		Vector2 position = Math::RandomVec2(-60, 60);
+
+		billboard->Add(Vector3(position.x, scale.y * 0.5f, position.y), scale,2);
 	}
 }
 void BillboardDemo::Mesh()

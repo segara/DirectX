@@ -5,7 +5,7 @@ cbuffer CB_PerFrame
     matrix Projection;
     matrix VP;
     
-    float4 Culling[4];
+    float4 Culling[4]; //프리스텀 컬링용(frustum culling)
     float4 Clipping;
     
     float Time;
@@ -132,6 +132,11 @@ RasterizerState FillMode_WireFrame
     FillMode = WireFrame;
 };
 
+RasterizerState CullMode_None
+{
+    CullMode = None;
+};
+
 DepthStencilState DepthEnable_False
 {
     DepthEnable = false;
@@ -171,10 +176,30 @@ BlendState AlphaBlend
     RenderTargetWriteMask[0] = 15; //0x0F
 };
 
+BlendState AlphaBlend_AlphaToCoverageEnable
+{
+    AlphaToCoverageEnable = true;
+    //외각선 깔끔하게 만드는 옵션
+
+    //설명: 메모장 확인
+
+    BlendEnable[0] = true;
+    //렌더타겟 0 에 blend사용
+    SrcBlend[0] = SRC_ALPHA;
+    DestBlend[0] = INV_SRC_ALPHA;
+    BlendOp[0] = ADD;
+
+    SrcBlendAlpha[0] = One;
+    DestBlendAlpha[0] = Zero;
+    BlendOpAlpha[0] = Add;
+
+    RenderTargetWriteMask[0] = 15; //0x0F
+};
+
 BlendState AdditiveBlend
 {
     AlphaToCoverageEnable = false;
-   
+    
     BlendEnable[0] = true;
     SrcBlend[0] = One;
     DestBlend[0] = One;

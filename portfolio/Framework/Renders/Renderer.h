@@ -15,6 +15,9 @@ public:
 	virtual void Render();
 
 	Transform* GetTransform() { return transform; }
+
+protected:
+	void Topology(D3D11_PRIMITIVE_TOPOLOGY val) { topology = val; }
 private:
 	void Initialize();
 protected:

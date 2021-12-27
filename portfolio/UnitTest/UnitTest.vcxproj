@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BillboardDemo.cpp" />
+    <ClCompile Include="BlurDemo.cpp" />
     <ClCompile Include="CubeSkyDemo.cpp" />
     <ClCompile Include="GetAnimationBoneDemo.cpp" />
     <ClCompile Include="GetMultiBoneDemo.cpp" />
@@ -30,10 +31,12 @@
     <ClCompile Include="LightingDemo.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MeshDemo.cpp" />
+    <ClCompile Include="MRTDemo.cpp" />
     <ClCompile Include="NormalMappingDemo.cpp" />
     <ClCompile Include="ObbCollisionDemo.cpp" />
     <ClCompile Include="ObbRaycastDemo.cpp" />
     <ClCompile Include="PointLightingDemo.cpp" />
+    <ClCompile Include="ColorToneDemo.cpp" />
     <ClCompile Include="ProjectionDemo.cpp" />
     <ClCompile Include="RawBufferDemo.cpp" />
     <ClCompile Include="SpotLightingDemo.cpp" />
@@ -50,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BillboardDemo.h" />
+    <ClInclude Include="BlurDemo.h" />
     <ClInclude Include="CubeSkyDemo.h" />
     <ClInclude Include="GetAnimationBoneDemo.h" />
     <ClInclude Include="GetMultiBoneDemo.h" />
@@ -60,10 +64,12 @@
     <ClInclude Include="LightingDemo.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="MeshDemo.h" />
+    <ClInclude Include="MRTDemo.h" />
     <ClInclude Include="NormalMappingDemo.h" />
     <ClInclude Include="ObbCollisionDemo.h" />
     <ClInclude Include="ObbRaycastDemo.h" />
     <ClInclude Include="PointLightingDemo.h" />
+    <ClInclude Include="ColorToneDemo.h" />
     <ClInclude Include="ProjectionDemo.h" />
     <ClInclude Include="RawBufferDemo.h" />
     <ClInclude Include="SpotLightingDemo.h" />

@@ -62,7 +62,7 @@ float4 ComputePosition(float3 position, float3 velocity, float age, float normal
     position += normalize(velocity) * amount * Particle.ReadyTime;
     position += Particle.Gravity * age * normalizedAge;
     
-    //여기에서는 local - world 그대로 쓴다고 보면 됨 
+    //여기에서는 local -> world 그대로 쓴다고 보면 됨 
     //따라서 world변환을 안하고 vp만 실행
     return ViewProjection(float4(position, 1));
 }

@@ -116,12 +116,12 @@ cbuffer CB_TweenFrame
     TweenFrame TweenFrames[MAX_MODEL_INSTANCE];
 };
 
-struct VertexOutput
-{
-    float4 Position : SV_Position;
-    float3 Normal : Normal;
-    float2 Uv : Uv;
-};
+//struct VertexOutput
+//{
+//    float4 Position : SV_Position;
+//    float3 Normal : Normal;
+//    float2 Uv : Uv;
+//};
 
 void SetAnimationTweenWorld(inout matrix world, VertexModel input)
 {

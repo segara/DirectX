@@ -20,6 +20,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Shader", "_Shader", "{F814
 		..\..\_Shaders\06_Rectangle.fx = ..\..\_Shaders\06_Rectangle.fx
 		..\..\_Shaders\08_World.fx = ..\..\_Shaders\08_World.fx
 		..\..\_Shaders\09_World.fx = ..\..\_Shaders\09_World.fx
+		..\_Shaders\100_ColorTone.fx = ..\_Shaders\100_ColorTone.fx
+		..\_Shaders\101_MRT.fx = ..\_Shaders\101_MRT.fx
+		..\_Shaders\104_Blur.fx = ..\_Shaders\104_Blur.fx
 		..\..\_Shaders\11_Texture.fx = ..\..\_Shaders\11_Texture.fx
 		..\_Shaders\12_TextureSampler.fx = ..\_Shaders\12_TextureSampler.fx
 		..\_Shaders\13_Terrain.fx = ..\_Shaders\13_Terrain.fx
@@ -51,6 +54,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Shader", "_Shader", "{F814
 		..\_Shaders\85_Rain.fx = ..\_Shaders\85_Rain.fx
 		..\_Shaders\85_Snow.fx = ..\_Shaders\85_Snow.fx
 		..\_Shaders\89_Particle.fx = ..\_Shaders\89_Particle.fx
+		..\_Shaders\96_Billboard.fx = ..\_Shaders\96_Billboard.fx
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ModelEditor", "ModelEditor\ModelEditor.vcxproj", "{13D047FE-EC19-4CCC-802D-F800DDF376CD}"

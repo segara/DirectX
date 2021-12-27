@@ -1,29 +1,25 @@
 #include "stdafx.h"
 #include "Main.h"
 #include "Systems/Window.h"
-#include "InstancingDemo.h"
-#include "CubeSkyDemo.h"
-#include "RawBufferDemo.h"
-#include "ThreadDemo.h"
-#include "TextureBufferDemo.h"
-#include "InstancingFrameworkDemo.h"
-#include "GetRayCastDemo.h"
-#include "ProjectionDemo.h"
-#include "ObbRaycastDemo.h"
-#include "ObbCollisionDemo.h"
-#include "GetMultiBoneDemo.h"
-#include "LightingDemo.h"
-#include "PointLightingDemo.h"
-#include "SpotLightingDemo.h"
-#include "NormalMappingDemo.h"
-#include "BillboardDemo.h"
-#include "WeatherDemo.h"
 
-//#pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console");
+#include "WeatherDemo.h"
+#include "BillboardDemo.h"
+#include "NormalMappingDemo.h"
+#include "SpotLightingDemo.h"
+#include "PointLightingDemo.h"
+#include "LightingDemo.h"
+#include "ColorToneDemo.h"
+#include "MRTDemo.h"
+#include "BlurDemo.h"
 
 void Main::Initialize()
 {
-	Push(new WeatherDemo());
+	//Push(new WeatherDemo());
+	Push(new BlurDemo());
+	//Push(new NormalMappingDemo());
+	//Push(new SpotLightingDemo());
+	//Push(new PointLightingDemo());
+	//Push(new LightingDemo());
 }
 
 void Main::Ready()
