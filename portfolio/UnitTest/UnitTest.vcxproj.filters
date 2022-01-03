@@ -69,6 +69,7 @@
     <ClCompile Include="BlurDemo.cpp" />
     <ClCompile Include="GaussianBlurDemo.cpp" />
     <ClCompile Include="GaussianBlurDemo2.cpp" />
+    <ClCompile Include="BloomDemo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h" />
@@ -139,6 +140,7 @@
     <ClInclude Include="BlurDemo.h" />
     <ClInclude Include="GaussianBlurDemo.h" />
     <ClInclude Include="GaussianBlurDemo2.h" />
+    <ClInclude Include="BloomDemo.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Objects">
