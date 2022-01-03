@@ -50,6 +50,7 @@
     <ClCompile Include="Renders\Lighting.cpp" />
     <ClCompile Include="Renders\Material.cpp" />
     <ClCompile Include="Renders\PerFrame.cpp" />
+    <ClCompile Include="Renders\PostEffect.cpp" />
     <ClCompile Include="Renders\Render2D.cpp" />
     <ClCompile Include="Renders\Renderer.cpp" />
     <ClCompile Include="Renders\Shader.cpp" />
@@ -67,10 +68,12 @@
     <ClCompile Include="Utilities\String.cpp" />
     <ClCompile Include="Utilities\Xml.cpp" />
     <ClCompile Include="Viewer\Camera.cpp" />
+    <ClCompile Include="Viewer\DepthStencil.cpp" />
     <ClCompile Include="Viewer\MoveCamera.cpp" />
     <ClCompile Include="Viewer\Orthographic.cpp" />
     <ClCompile Include="Viewer\Perspective.cpp" />
     <ClCompile Include="Viewer\Projection.cpp" />
+    <ClCompile Include="Viewer\RenderTarget.cpp" />
     <ClCompile Include="Viewer\Viewport.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -101,6 +104,7 @@
     <ClInclude Include="Renders\Lighting.h" />
     <ClInclude Include="Renders\Material.h" />
     <ClInclude Include="Renders\PerFrame.h" />
+    <ClInclude Include="Renders\PostEffect.h" />
     <ClInclude Include="Renders\Render2D.h" />
     <ClInclude Include="Renders\Renderer.h" />
     <ClInclude Include="Renders\Shader.h" />
@@ -120,10 +124,12 @@
     <ClInclude Include="Utilities\String.h" />
     <ClInclude Include="Utilities\Xml.h" />
     <ClInclude Include="Viewer\Camera.h" />
+    <ClInclude Include="Viewer\DepthStencil.h" />
     <ClInclude Include="Viewer\MoveCamera.h" />
     <ClInclude Include="Viewer\Orthographic.h" />
     <ClInclude Include="Viewer\Perspective.h" />
     <ClInclude Include="Viewer\Projection.h" />
+    <ClInclude Include="Viewer\RenderTarget.h" />
     <ClInclude Include="Viewer\Viewport.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

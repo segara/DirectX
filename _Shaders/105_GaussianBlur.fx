@@ -133,17 +133,65 @@ float4 PS_GaussianBlurY(VertexOutput input) : SV_Target
     return float4(color.rgb, 1.0f);
 }
 
+struct PixelOutput_UseMultiTarget
+{
+    float4 Color0 : SV_Target0;
+    float4 Color1 : SV_Target1;
+    
+};
+
+PixelOutput_UseMultiTarget PS_GaussianBlurMultiRenderTarget(VertexOutput input)
+{
+    PixelOutput_UseMultiTarget output;
+    
+    // x blur
+    float2 uv = input.Uv;
+    float u = PixelSize.x;
+    float sum = 0;
+    float4 color = 0;
+    
+    for (int i = -GaussBlurCount; i <= GaussBlurCount; i++)
+    {
+        float2 temp = uv + float2(u * (float) i, 0.0f);
+        color += Weight[6 + i] * DiffuseMap.Sample(LinearSampler, temp);
+        sum += Weight[6 + i];
+    }
+    color /= sum;
+    
+    output.Color0 = float4(color.rgb, 1.0f);
+    //sv_target0¿¡ °á°ú
+    
+    // y    blur
+    float v = PixelSize.y;
+     sum = 0;
+     color = 0;
+    
+    for ( i = -GaussBlurCount; i <= GaussBlurCount; i++)
+    {
+        float2 temp = uv + float2(0.0f, v * (float) i);
+        color += Weight[6 + i] * DiffuseMap.Sample(LinearSampler, temp);
+        sum += Weight[6 + i];
+    }
+    color /= sum;
+    
+    output.Color1 = float4(color.rgb, 1.0f);
+ 
+    return output; 
+}
+
+Texture2D GaussianMrt[2];
+
+float4 PS_GaussianCombined(VertexOutput input) : SV_Target
+{
+    float4 color1 = GaussianMrt[0].Sample(LinearSampler, input.Uv);
+    float4 color2 = GaussianMrt[1].Sample(LinearSampler, input.Uv);
+    
+    return float4((color1.rgb + color2.rgb) * 0.5f, 1);
+}
+
 technique11 T0
 {
    P_VP(P0, VS, PS_Diffuse)
-   P_VP(P1, VS, PS_Blur)
-   P_VP(P2, VS, PS_RadialBlur)
-  
-}
-
-technique11 T1
-{
-   P_VP(P0, VS, PS_GaussianBlurX)
-   P_VP(P1, VS, PS_GaussianBlurY)
-  
+   P_VP(P1, VS, PS_GaussianBlurMultiRenderTarget)
+   P_VP(P2, VS, PS_GaussianCombined)
 }

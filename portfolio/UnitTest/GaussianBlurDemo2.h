@@ -3,7 +3,7 @@
 
 //class CubeMap;
 class CubeSky;
-class  BlurDemo : public IExecute
+class  GaussianBlurDemo2 : public IExecute
 {
 public:
 	// IExecute을(를) 통해 상속됨
@@ -31,7 +31,7 @@ private:
 private:
 	Shader* shader;
 
-	RenderTarget* renderTarget;
+	RenderTarget* renderTarget[3];
 	DepthStencil* depthStencil;
 	//post effect시에 viewport를 별도로 만들어서 rtv, dsv, viewport 1:1:1로 대응
 	Viewport* viewport;

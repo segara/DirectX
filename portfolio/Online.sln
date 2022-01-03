@@ -23,6 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Shader", "_Shader", "{F814
 		..\_Shaders\100_ColorTone.fx = ..\_Shaders\100_ColorTone.fx
 		..\_Shaders\101_MRT.fx = ..\_Shaders\101_MRT.fx
 		..\_Shaders\104_Blur.fx = ..\_Shaders\104_Blur.fx
+		..\_Shaders\105_GaussianBlur.fx = ..\_Shaders\105_GaussianBlur.fx
 		..\..\_Shaders\11_Texture.fx = ..\..\_Shaders\11_Texture.fx
 		..\_Shaders\12_TextureSampler.fx = ..\_Shaders\12_TextureSampler.fx
 		..\_Shaders\13_Terrain.fx = ..\_Shaders\13_Terrain.fx

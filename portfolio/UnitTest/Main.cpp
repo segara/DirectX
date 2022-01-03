@@ -11,11 +11,14 @@
 #include "ColorToneDemo.h"
 #include "MRTDemo.h"
 #include "BlurDemo.h"
+#include "GaussianBlurDemo.h"
+#include "GaussianBlurDemo2.h"
 
 void Main::Initialize()
 {
 	//Push(new WeatherDemo());
-	Push(new BlurDemo());
+	//Push(new GaussianBlurDemo());
+	Push(new GaussianBlurDemo2());
 	//Push(new NormalMappingDemo());
 	//Push(new SpotLightingDemo());
 	//Push(new PointLightingDemo());

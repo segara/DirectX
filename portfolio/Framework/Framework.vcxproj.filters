@@ -172,6 +172,15 @@
     <ClCompile Include="Particle\ParticleSystem.cpp">
       <Filter>Particle</Filter>
     </ClCompile>
+    <ClCompile Include="Viewer\RenderTarget.cpp">
+      <Filter>Viewer</Filter>
+    </ClCompile>
+    <ClCompile Include="Viewer\DepthStencil.cpp">
+      <Filter>Viewer</Filter>
+    </ClCompile>
+    <ClCompile Include="Renders\PostEffect.cpp">
+      <Filter>Renders</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Environment\Terrain.h">
@@ -324,6 +333,15 @@
     </ClInclude>
     <ClInclude Include="Particle\ParticleSystem.h">
       <Filter>Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Viewer\RenderTarget.h">
+      <Filter>Viewer</Filter>
+    </ClInclude>
+    <ClInclude Include="Viewer\DepthStencil.h">
+      <Filter>Viewer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renders\PostEffect.h">
+      <Filter>Renders</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
