@@ -3,7 +3,7 @@
 
 //class CubeMap;
 class CubeSky;
-class  BloomDemo : public IExecute
+class  DynamicCubeMapDemo : public IExecute
 {
 public:
 	// IExecute을(를) 통해 상속됨
@@ -27,34 +27,11 @@ private:
 
 private:
 	void Pass(UINT mesh, UINT model, UINT anim);
-private:
-	void SetBlur();
-	void GetBlurParameter(vector<float>& weights, vector<Vector2>& offsets, float x, float y);
-	float GetGaussFunction(float val);
-private:
-	bool bOrigin = false;
-	float threshold = 0.05f;
-	UINT blurCount = 15;
 
-	vector<float> weightX;
-	vector<Vector2> offsetX;
-
-	vector<float> weightY;
-	vector<Vector2> offsetY;
 private:
 	Shader* shader;
-	Shader* shaderSky;
-
-	//render target1 : luminosity
-	//render target2 : x/y blur
-	//render target3 : 1+2 합침
-
-	RenderTarget* renderTarget[5];
-	DepthStencil* depthStencil;
-	//post effect시에 viewport를 별도로 만들어서 rtv, dsv, viewport 1:1:1로 대응
-	Viewport* viewport;
-	Render2D* render2D; //2d box 렌더러
-	PostEffect* postEffect;
+	
+	DynamicCubeMap* cubeMap;
 
 	Billboard* billboard;
 
@@ -67,6 +44,7 @@ private:
 
 	MeshRender* cube;
 	MeshRender* sphere;
+	MeshRender* sphere_dynamicCubeMap;
 	MeshRender* cylinder;
 	MeshRender* grid;
 

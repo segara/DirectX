@@ -1,9 +1,9 @@
 #include "stdafx.h"
-#include "BloomDemo.h"
+#include "DynamicCubeMapDemo.h"
 #include "../Framework/Viewer/MoveCamera.h"
 #include "../Framework/Environment/CubeSky.h"
 
-void BloomDemo::Initialize()
+void DynamicCubeMapDemo::Initialize()
 {
 	Context::Get()->GetCamera()->RotationDegree(20, 0, 0);
 	Context::Get()->GetCamera()->Position(1, 36, -85);
@@ -11,28 +11,11 @@ void BloomDemo::Initialize()
 	//Performance performance;
 	//performance.Start();
 
-	shader = new Shader(L"96_Billboard.fx");
-	shaderSky = new Shader(L"10_Cube.fx");
+	shader = new Shader(L"107_DynamicCubeMap.fx");
 
+	cubeMap = new DynamicCubeMap(shader, 256, 256);
 	cubeSky = new CubeSky(L"Environment/GrassCube1024.dds", shader);
 
-
-	float width = D3D::Width(), height = D3D::Height();
-	renderTarget[0] = new RenderTarget((UINT)width, (UINT)height); //원본
-	renderTarget[1] = new RenderTarget((UINT)width, (UINT)height); //luminosity
-	renderTarget[2] = new RenderTarget((UINT)width, (UINT)height); //x blur
-	renderTarget[3] = new RenderTarget((UINT)width, (UINT)height); //x+y blur
-	renderTarget[4] = new RenderTarget((UINT)width, (UINT)height); //composite
-	depthStencil = new DepthStencil((UINT)width, (UINT)height);
-	viewport = new Viewport(width, height);
-
-	render2D = new Render2D();
-	render2D->GetTransform()->Scale(355.0f, 200, 1);
-	render2D->GetTransform()->Position(200, 120, 0);
-	render2D->SRV(renderTarget[0]->SRV());
-	//float t = performance.End();
-
-	postEffect = new PostEffect(L"106_Bloom.fx");
 	//postEffect->SRV(renderTarget->SRV());
 	//MessageBox(D3D::GetDesc().Handle, to_wstring(t).c_str(), L"", MB_OK);
 
@@ -47,7 +30,7 @@ void BloomDemo::Initialize()
 }
 
 
-void BloomDemo::Destroy()
+void DynamicCubeMapDemo::Destroy()
 {
 	SafeDelete(shader);
 	//SafeDelete(quad);
@@ -57,24 +40,9 @@ void BloomDemo::Destroy()
 	SafeDelete(cubeSky);
 }
 
-void BloomDemo::Update()
+void DynamicCubeMapDemo::Update()
 {
 	
-	ImGui::InputFloat("Threshold", &threshold, 0.01f);
-	postEffect->GetShader()->AsScalar("Threshold")->SetFloat(threshold);
-
-
-	ImGui::InputInt("BlurCount", (int *)&blurCount, 2);
-	blurCount %= 33;
-	if (blurCount < 1)
-		blurCount = 1;
-	postEffect->GetShader()->AsScalar("BlurCount")->SetInt(blurCount);
-
-
-	//UV 기준으로 pixel사이즈 계산 
-	Vector2 PixelSize = Vector2(1.0f / D3D::Width(), 1.0f / D3D::Height());
-	postEffect->GetShader()->AsVector("PixelSize")->SetFloatVector(PixelSize);
-
 	//static UINT selected = 0;
 	//ImGui::InputInt("NormalMap Selected", (int *)&selected);
 	//selected %= 4;
@@ -163,6 +131,7 @@ void BloomDemo::Update()
 	cube->Update();
 	grid->Update();
 	sphere->Update();
+	sphere_dynamicCubeMap->Update();
 	cylinder->Update();
 
 	airplane->Update();
@@ -187,32 +156,30 @@ void BloomDemo::Update()
 	weapon->UpdateTransforms();
 	weapon->Update();
 	billboard->Update();
-	render2D->Update(); 
-	postEffect->Update();
+	
 }
 
-void BloomDemo::PreRender()
+void DynamicCubeMapDemo::PreRender()
 {
+	Vector3 position, scale;
+	sphere_dynamicCubeMap->GetTransform(0)->Position(&position);
+	sphere_dynamicCubeMap->GetTransform(0)->Scale(&scale);
+	 
+	cubeMap->PreRender(position, scale);
+
+	//dynamic cube map (6면)에 렌더
 	{
-////////////////////////////////////////////////////////////
-//뷰표트를 셋팅 :D3D::GetDC()->RSSetViewports(1, &viewport);
-//뷰포트를 셋팅하지 않으면
-//렌더타겟 텍스쳐 사이즈를 줄인채로 렌더링을 했을시 예)200,200
-//렌더텍스쳐 200,200 에 (뷰포트)1280/920의 화면을 렌더링할것이다.
-//뷰포트 0,0부터 렌더링되기 때문에 화면 윗부분의 일부만 출력됨
-//뷰포트까지 맞춰서 줄이고 적용하면 화면에 맞게 출력된다.
-		renderTarget[0]->PreRender(depthStencil); //backbuffer에 렌더타겟을 셋팅
-		viewport->RSSetViewport();
-		
+		cubeSky->Pass(6);
 		cubeSky->Render();
 
-		Pass(0, 1, 2);
+		Pass(7, 8, 9);
 
 		//wall 메터리얼을 쉐이더에 밀어넣고
 		//위의 wall로 렌더링
 		wall->Render(); ;
 
 		sphere->Render();
+		sphere_dynamicCubeMap->Render();
 
 
 		brick->Render();
@@ -233,81 +200,60 @@ void BloomDemo::PreRender()
 		weapon->Render();
 		billboard->Render();
 	}
-
-	//Luminosity
-	{
-		renderTarget[1]->PreRender(depthStencil);
-		//다시 1번 렌더타겟을 백버퍼에 셋팅. 검은색으로 클리어
-		viewport->RSSetViewport();
-		postEffect->Pass(1); 
-		postEffect->SRV(renderTarget[0]->SRV());//0번 렌더텍스쳐를 참조
-		postEffect->Render();
-	}
-	SetBlur();
-	//BlurX
-	{
-		postEffect->GetShader()->AsScalar("Weights")->SetFloatArray(&weightX[0], 0, weightX.size());
-		postEffect->GetShader()->AsVector("Offsets")->SetRawValue(&offsetX[0], 0, sizeof(Vector2) * offsetX.size());
-
-
-		renderTarget[2]->PreRender(depthStencil);
-		viewport->RSSetViewport();
-
-		postEffect->SRV(renderTarget[1]->SRV());
-		postEffect->Pass(2);
-		postEffect->Render();
-	}
-
-	//BlurY
-	{
-		postEffect->GetShader()->AsScalar("Weights")->SetFloatArray(&weightY[0], 0, weightY.size());
-		postEffect->GetShader()->AsVector("Offsets")->SetRawValue(&offsetY[0], 0, sizeof(Vector2) * offsetY.size());
-
-
-		renderTarget[3]->PreRender(depthStencil);
-		viewport->RSSetViewport();
-
-		postEffect->SRV(renderTarget[2]->SRV());//x결과를 원본으로 사용
-		postEffect->Pass(2);
-		postEffect->Render();
-	}
-
-	////Comsite
-	//{
-	//	renderTarget[4]->PreRender(depthStencil);
-	//	viewport->RSSetViewport();
-
-	//	postEffect->GetShader()->AsSRV("LuminosityMap")->SetResource(renderTarget[1]->SRV());
-	//	postEffect->GetShader()->AsSRV("BlurMap")->SetResource(renderTarget[3]->SRV());
-
-	//	postEffect->Pass(2);
-	//	postEffect->Render();
-	//}
 	
 
 }
 
-void BloomDemo::Render()
+void DynamicCubeMapDemo::Render()
 {
 	//if (Keyboard::Get()->Down(VK_SPACE))
 	//	renderTarget->SaveTexture(L"../RenderTarget.png");
+	
+	//기존 방식 렌더링
+	{
+		cubeSky->Pass(0);
+		cubeSky->Render();
 
+		Pass(1, 2, 3);
+
+		//wall 메터리얼을 쉐이더에 밀어넣고
+		//위의 wall로 렌더링
+		wall->Render(); ;
+
+		sphere->Render();
+
+		shader->AsSRV("DynamicCubeMap")->SetResource(cubeMap->SRV());
+		sphere_dynamicCubeMap->Pass(10);
+		//10번이 메쉬에대한 큐브맵렌더링
+		sphere_dynamicCubeMap->Render();
+
+
+		brick->Render();
+		cylinder->Render();
+
+		stone->Render();
+		cube->Render();
+
+		floor->Render();
+		grid->Render();
+
+		airplane->Render();
+		kachujin->Render();
+		for (UINT i = 0; i < kachujin->GetTransformCount(); ++i)
+		{
+			colliders[i]->Collider->Render();
+		}
+		weapon->Render();
+		billboard->Render();
+	}
 }
 
-void BloomDemo::PostRender()
+void DynamicCubeMapDemo::PostRender()
 {
-	//순차적으로 렌더링됨
-	postEffect->Pass(2);
-
-	postEffect->SRV(renderTarget[3]->SRV());
-	//postEffect->SRV(renderTarget->SRV());
-	postEffect->Render();
-
-	//render2D->SRV(renderTarget->SRV());
-	render2D->Render();
+	
 }
 
-void BloomDemo::Airplane()
+void DynamicCubeMapDemo::Airplane()
 {
 	airplane = new ModelRender(shader);
 	airplane->ReadMesh(L"B787/Airplane");
@@ -321,7 +267,7 @@ void BloomDemo::Airplane()
 	models.push_back(airplane);
 }
 
-void BloomDemo::Kachujin()
+void DynamicCubeMapDemo::Kachujin()
 {
 	kachujin = new ModelAnimator(shader);
 	kachujin->ReadMesh(L"Kachujin/Mesh");
@@ -366,7 +312,7 @@ void BloomDemo::Kachujin()
 	animators.push_back(kachujin);
 }
 
-void BloomDemo::Colliders()
+void DynamicCubeMapDemo::Colliders()
 {
 	UINT count = kachujin->GetTransformCount();
 	colliders = new ColliderObject*[count];
@@ -391,7 +337,7 @@ void BloomDemo::Colliders()
 	}
 }
 
-void BloomDemo::Weapon()
+void DynamicCubeMapDemo::Weapon()
 {
 	weapon = new ModelRender(shader);
 	weapon->ReadMesh(L"Weapon/Sword");
@@ -410,7 +356,7 @@ void BloomDemo::Weapon()
 	weaponInitTransform->Rotation(0, 0, 1);
 }
 
-void BloomDemo::CreatePointLight()
+void DynamicCubeMapDemo::CreatePointLight()
 {
 	PointLight light;
 	light =
@@ -425,7 +371,7 @@ void BloomDemo::CreatePointLight()
 	};
 	Lighting::Get()->AddPointLight(light);
 }
-void BloomDemo::CreateSpotLight()
+void DynamicCubeMapDemo::CreateSpotLight()
 {
 	SpotLight light;
 	light =
@@ -442,7 +388,7 @@ void BloomDemo::CreateSpotLight()
 	};
 	Lighting::Get()->AddSpotLight(light);
 }
-void BloomDemo::CreateBillboard()
+void DynamicCubeMapDemo::CreateBillboard()
 {
 	billboard = new Billboard(shader);
 	billboard->Pass(4);
@@ -473,7 +419,7 @@ void BloomDemo::CreateBillboard()
 		billboard->Add(Vector3(position.x, scale.y * 0.5f, position.y), scale,2);
 	}
 }
-void BloomDemo::Mesh()
+void DynamicCubeMapDemo::Mesh()
 {
 	//Create Material//
 	floor = new Material(shader);
@@ -539,13 +485,27 @@ void BloomDemo::Mesh()
 		transform->Position(30, 15.5f, -15.0f + (float)i * 15.0f);
 		transform->Scale(5, 5, 5);
 	}
+	
 	sphere->UpdateTransforms();
+
+	sphere_dynamicCubeMap = new MeshRender(shader, new MeshSphere(0.5f, 20, 20));
+	transform = sphere_dynamicCubeMap->AddTransform();
+	transform->Position(0, 10, -40);
+	transform->Scale(8, 8, 8);
+	sphere_dynamicCubeMap->UpdateTransforms();
+
 	cylinder->UpdateTransforms();
 	cube->UpdateTransforms();
 	grid->UpdateTransforms();
+
+	meshes.push_back(sphere);
+	meshes.push_back(sphere_dynamicCubeMap);
+	meshes.push_back(cylinder);
+	meshes.push_back(cube);
+	meshes.push_back(grid);
 }
 
-void BloomDemo::Pass(UINT mesh, UINT model, UINT anim)
+void DynamicCubeMapDemo::Pass(UINT mesh, UINT model, UINT anim)
 {
 	for (MeshRender* temp : meshes)
 		temp->Pass(mesh);
@@ -555,47 +515,4 @@ void BloomDemo::Pass(UINT mesh, UINT model, UINT anim)
 
 	for (ModelAnimator* temp : animators)
 		temp->Pass(anim);
-}
-void BloomDemo::SetBlur()
-{
-	float x = 1.0f / D3D::Width();
-	float y = 1.0f / D3D::Height();
-
-	GetBlurParameter(weightX, offsetX, x, 0);
-	GetBlurParameter(weightY, offsetY, 0, y);
-}
-void BloomDemo::GetBlurParameter(vector<float>& weights, vector<Vector2>& offsets, float x, float y)
-{
-	weights.clear();
-	weights.assign(blurCount, float());
-
-	offsets.clear();
-	offsets.assign(blurCount, Vector2());
-
-	weights[0] = GetGaussFunction(0); //1
-	offsets[0] = Vector2(0, 0);
-
-	float sum = weights[0];
-
-	for (UINT i = 0; i < blurCount / 2; i++)
-	{
-		float temp = GetGaussFunction((float)(i + 1));
-
-		weights[i * 2 + 1] = temp;
-		weights[i * 2 + 2] = temp;
-		sum += temp * 2;
-
-		Vector2 temp2 = Vector2(x, y) * (i * 2 + 1.5f);
-		offsets[i * 2 + 1] = temp2;
-		offsets[i * 2 + 2] = -temp2;
-	}
-
-	for (UINT i = 0; i < blurCount; i++)
-		weights[i] /= sum;
-}
-float BloomDemo::GetGaussFunction(float val)
-{
-	//sqrt : 루트
-	//exp : pow
-	return (float)((1.0 / sqrt(2 * Math::PI * blurCount)) * exp(-(val * val) / (2 * blurCount * blurCount)));
 }

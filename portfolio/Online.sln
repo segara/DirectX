@@ -25,6 +25,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Shader", "_Shader", "{F814
 		..\_Shaders\104_Blur.fx = ..\_Shaders\104_Blur.fx
 		..\_Shaders\105_GaussianBlur.fx = ..\_Shaders\105_GaussianBlur.fx
 		..\_Shaders\106_Bloom.fx = ..\_Shaders\106_Bloom.fx
+		..\_Shaders\107_DynamicCubeMap.fx = ..\_Shaders\107_DynamicCubeMap.fx
 		..\_Shaders\10_Cube.fx = ..\_Shaders\10_Cube.fx
 		..\_Shaders\11_Texture.fx = ..\_Shaders\11_Texture.fx
 		..\_Shaders\12_TextureSampler.fx = ..\_Shaders\12_TextureSampler.fx

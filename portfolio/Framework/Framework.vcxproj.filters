@@ -181,6 +181,7 @@
     <ClCompile Include="Renders\PostEffect.cpp">
       <Filter>Renders</Filter>
     </ClCompile>
+    <ClCompile Include="DynamicCubeMap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Environment\Terrain.h">
@@ -343,5 +344,6 @@
     <ClInclude Include="Renders\PostEffect.h">
       <Filter>Renders</Filter>
     </ClInclude>
+    <ClInclude Include="DynamicCubeMap.h" />
   </ItemGroup>
 </Project>
