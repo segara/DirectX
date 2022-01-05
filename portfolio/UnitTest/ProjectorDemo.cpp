@@ -1,9 +1,9 @@
 #include "stdafx.h"
-#include "DynamicCubeMapDemo.h"
+#include "ProjectorDemo.h"
 #include "../Framework/Viewer/MoveCamera.h"
 #include "../Framework/Environment/CubeSky.h"
 
-void DynamicCubeMapDemo::Initialize()
+void ProjectorDemo::Initialize()
 {
 	Context::Get()->GetCamera()->RotationDegree(20, 0, 0);
 	Context::Get()->GetCamera()->Position(1, 36, -85);
@@ -11,10 +11,13 @@ void DynamicCubeMapDemo::Initialize()
 	//Performance performance;
 	//performance.Start();
 
-	shader = new Shader(L"107_DynamicCubeMap.fx");
+	shader = new Shader(L"111_Projector.fx");
 
-	cubeMap = new DynamicCubeMap(shader, 256, 256);
-	cubeSky = new CubeSky(L"Environment/GrassCube1024.dds", shader);
+	projector = new Projector(shader, L"Box.png", 1, 1);
+
+
+
+	cubeSky = new CubeSky(L"Environment/GrassCube1024.dds");
 
 	//postEffect->SRV(renderTarget->SRV());
 	//MessageBox(D3D::GetDesc().Handle, to_wstring(t).c_str(), L"", MB_OK);
@@ -26,11 +29,11 @@ void DynamicCubeMapDemo::Initialize()
 	Weapon();
 	CreatePointLight();
 	CreateSpotLight();
-	CreateBillboard();
+	CreateSpotLight();
 }
 
 
-void DynamicCubeMapDemo::Destroy()
+void ProjectorDemo::Destroy()
 {
 	SafeDelete(shader);
 	//SafeDelete(quad);
@@ -40,14 +43,13 @@ void DynamicCubeMapDemo::Destroy()
 	SafeDelete(cubeSky);
 }
 
-void DynamicCubeMapDemo::Update()
+void ProjectorDemo::Update()
 {
-	
+	projector->Update();
 	//cubeMap->Type() : 레퍼런스를 반환
 	//레퍼런스 : 기존 변수와 같은 주소값을 사용, 즉 변수를 포인터로 쓰듯이 &로 포인터에 대입
 
-	ImGui::InputInt("CubeMap Type Selected", (int *)(&cubeMap->Type()));
-	cubeMap->Type() %= 5;
+ 
 	
 	static float amount = 0.52f;
 	ImGui::SliderFloat("RefractionAmount", &amount, 0,1);
@@ -174,24 +176,23 @@ void DynamicCubeMapDemo::Update()
 	}
 	weapon->UpdateTransforms();
 	weapon->Update();
-	billboard->Update();
+	
 	
 }
 
-void DynamicCubeMapDemo::PreRender()
+void ProjectorDemo::PreRender()
 {
 	Vector3 position, scale;
 	sphere_dynamicCubeMap->GetTransform(0)->Position(&position);
 	sphere_dynamicCubeMap->GetTransform(0)->Scale(&scale);
 	 
-	cubeMap->PreRender(position, scale);
-
+	
 	//dynamic cube map (6면)에 렌더
 	{
-		cubeSky->Pass(6);
+		cubeSky->Pass(0);
 		cubeSky->Render();
 
-		Pass(7, 8, 9);
+		Pass(0, 1, 2);
 
 		//wall 메터리얼을 쉐이더에 밀어넣고
 		//위의 wall로 렌더링
@@ -223,8 +224,9 @@ void DynamicCubeMapDemo::PreRender()
 
 }
 
-void DynamicCubeMapDemo::Render()
+void ProjectorDemo::Render()
 {
+	projector->Render();
 	//if (Keyboard::Get()->Down(VK_SPACE))
 	//	renderTarget->SaveTexture(L"../RenderTarget.png");
 	
@@ -233,7 +235,7 @@ void DynamicCubeMapDemo::Render()
 		cubeSky->Pass(0);
 		cubeSky->Render();
 
-		Pass(1, 2, 3);
+		Pass(0, 1, 2);
 
 		//wall 메터리얼을 쉐이더에 밀어넣고
 		//위의 wall로 렌더링
@@ -241,10 +243,7 @@ void DynamicCubeMapDemo::Render()
 
 		sphere->Render();
 
-		shader->AsSRV("DynamicCubeMap")->SetResource(cubeMap->SRV());
-		sphere_dynamicCubeMap->Pass(10);
-		//10번이 메쉬에대한 큐브맵렌더링
-		sphere_dynamicCubeMap->Render();
+		
 
 
 		brick->Render();
@@ -263,17 +262,16 @@ void DynamicCubeMapDemo::Render()
 			colliders[i]->Collider->Render();
 		}
 		weapon->Render();
-		billboard->Pass(5);
-		billboard->Render();
+	
 	}
 }
 
-void DynamicCubeMapDemo::PostRender()
+void ProjectorDemo::PostRender()
 {
 	
 }
 
-void DynamicCubeMapDemo::Airplane()
+void ProjectorDemo::Airplane()
 {
 	airplane = new ModelRender(shader);
 	airplane->ReadMesh(L"B787/Airplane");
@@ -287,7 +285,7 @@ void DynamicCubeMapDemo::Airplane()
 	models.push_back(airplane);
 }
 
-void DynamicCubeMapDemo::Kachujin()
+void ProjectorDemo::Kachujin()
 {
 	kachujin = new ModelAnimator(shader);
 	kachujin->ReadMesh(L"Kachujin/Mesh");
@@ -332,7 +330,7 @@ void DynamicCubeMapDemo::Kachujin()
 	animators.push_back(kachujin);
 }
 
-void DynamicCubeMapDemo::Colliders()
+void ProjectorDemo::Colliders()
 {
 	UINT count = kachujin->GetTransformCount();
 	colliders = new ColliderObject*[count];
@@ -357,7 +355,7 @@ void DynamicCubeMapDemo::Colliders()
 	}
 }
 
-void DynamicCubeMapDemo::Weapon()
+void ProjectorDemo::Weapon()
 {
 	weapon = new ModelRender(shader);
 	weapon->ReadMesh(L"Weapon/Sword");
@@ -376,7 +374,7 @@ void DynamicCubeMapDemo::Weapon()
 	weaponInitTransform->Rotation(0, 0, 1);
 }
 
-void DynamicCubeMapDemo::CreatePointLight()
+void ProjectorDemo::CreatePointLight()
 {
 	PointLight light;
 	light =
@@ -391,7 +389,7 @@ void DynamicCubeMapDemo::CreatePointLight()
 	};
 	Lighting::Get()->AddPointLight(light);
 }
-void DynamicCubeMapDemo::CreateSpotLight()
+void ProjectorDemo::CreateSpotLight()
 {
 	SpotLight light;
 	light =
@@ -408,38 +406,8 @@ void DynamicCubeMapDemo::CreateSpotLight()
 	};
 	Lighting::Get()->AddSpotLight(light);
 }
-void DynamicCubeMapDemo::CreateBillboard()
-{
-	billboard = new Billboard(shader);
-	billboard->Pass(4);
-	billboard->AddTexture(L"Terrain/grass_14.tga");
-	billboard->AddTexture(L"Terrain/grass_07.tga");
-	billboard->AddTexture(L"Terrain/grass_11.tga");
-	for (UINT i = 0; i < 1200; i++)
-	{
-		Vector2 scale = Math::RandomVec2(1, 3);
-		Vector2 position = Math::RandomVec2(-60, 60);
 
-		billboard->Add(Vector3(position.x, scale.y * 0.5f, position.y), scale,0);
-	}
-
-	for (UINT i = 0; i < 300; i++)
-	{
-		Vector2 scale = Math::RandomVec2(1, 3);
-		Vector2 position = Math::RandomVec2(-60, 60);
-
-		billboard->Add(Vector3(position.x, scale.y * 0.5f, position.y), scale,1);
-	}
-
-	for (UINT i = 0; i < 700; i++)
-	{
-		Vector2 scale = Math::RandomVec2(1, 3);
-		Vector2 position = Math::RandomVec2(-60, 60);
-
-		billboard->Add(Vector3(position.x, scale.y * 0.5f, position.y), scale,2);
-	}
-}
-void DynamicCubeMapDemo::Mesh()
+void ProjectorDemo::Mesh()
 {
 	//Create Material//
 	floor = new Material(shader);
@@ -525,7 +493,7 @@ void DynamicCubeMapDemo::Mesh()
 	meshes.push_back(grid);
 }
 
-void DynamicCubeMapDemo::Pass(UINT mesh, UINT model, UINT anim)
+void ProjectorDemo::Pass(UINT mesh, UINT model, UINT anim)
 {
 	for (MeshRender* temp : meshes)
 		temp->Pass(mesh);

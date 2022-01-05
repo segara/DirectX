@@ -1,0 +1,4 @@
+//cubeMap->Type() : 레퍼런스를 반환
+//레퍼런스 : 기존 변수와 같은 주소값을 사용, 즉 변수를 포인터로 쓰듯이 &로 포인터에 대입
+
+ImGui::InputInt("CubeMap Type Selected", (int *)(&cubeMap->Type()));

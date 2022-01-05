@@ -181,7 +181,13 @@
     <ClCompile Include="Renders\PostEffect.cpp">
       <Filter>Renders</Filter>
     </ClCompile>
-    <ClCompile Include="DynamicCubeMap.cpp" />
+    <ClCompile Include="Objects\DynamicCubeMap.cpp" />
+    <ClCompile Include="Viewer\FixCamera.cpp">
+      <Filter>Viewer</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Projector.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Environment\Terrain.h">
@@ -250,7 +256,6 @@
     <ClInclude Include="Viewer\Viewport.h">
       <Filter>Viewer</Filter>
     </ClInclude>
-    <ClInclude Include="Framework.h" />
     <ClInclude Include="Viewer\Camera.h">
       <Filter>Viewer</Filter>
     </ClInclude>
@@ -344,6 +349,13 @@
     <ClInclude Include="Renders\PostEffect.h">
       <Filter>Renders</Filter>
     </ClInclude>
-    <ClInclude Include="DynamicCubeMap.h" />
+    <ClInclude Include="Objects\DynamicCubeMap.h" />
+    <ClInclude Include="Framework.h" />
+    <ClInclude Include="Viewer\FixCamera.h">
+      <Filter>Viewer</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Projector.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

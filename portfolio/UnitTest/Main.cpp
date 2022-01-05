@@ -13,13 +13,13 @@
 #include "BlurDemo.h"
 #include "GaussianBlurDemo.h"
 #include "GaussianBlurDemo2.h"
-#include "DynamicCubeMapDemo.h"
+#include "ProjectorDemo.h"
 
 void Main::Initialize()
 {
 	//Push(new WeatherDemo());
 	//Push(new GaussianBlurDemo());
-	Push(new DynamicCubeMapDemo());
+	Push(new ProjectorDemo());
 	//Push(new NormalMappingDemo());
 	//Push(new SpotLightingDemo());
 	//Push(new PointLightingDemo());

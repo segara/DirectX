@@ -1,4 +1,5 @@
 #include "00_Global.fx"
+#include "00_Light.fx"
 #include "00_Render.fx"
 //필요한 구조체
 

@@ -17,6 +17,8 @@ output.oPosition = input.Position.xyz; \
 output.Position = WorldPosition(input.Position); \
 output.wPosition = output.Position.xyz; \
 output.Position = ViewProjection(output.Position); \
+output.wvpPosition = output.Position; \
+output.wvpPosition_Sub = output.Position; \
 \
 output.Normal = WorldNormal(input.Normal); \
 output.Tangent = WorldTangent(input.Tangent); \
@@ -291,4 +293,9 @@ MeshOutput VS_Animation(VertexModel input)
     }
     VS_GENERATE
     return output;
+}
+/////////////////////////////////////////////////////////////////
+float4 PS_Sky(MeshOutput input) : SV_Target
+{
+    return SkyCubeMap.Sample(LinearSampler, input.oPosition);
 }

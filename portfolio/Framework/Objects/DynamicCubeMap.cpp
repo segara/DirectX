@@ -27,7 +27,7 @@ DynamicCubeMap::DynamicCubeMap(Shader* shader, UINT width, UINT height)
 	//Create RTV
 	{
 		D3D11_RENDER_TARGET_VIEW_DESC desc;
-		ZeroMemory(&desc, sizeof(D3D11_RENDER_TARGET_BLEND_DESC));
+		ZeroMemory(&desc, sizeof(D3D11_RENDER_TARGET_VIEW_DESC));
 		desc.Format = rtvFormat;
 		desc.ViewDimension = D3D11_RTV_DIMENSION_TEXTURE2DARRAY;
 		//6장 사용하므로 array 설정
@@ -78,7 +78,7 @@ DynamicCubeMap::DynamicCubeMap(Shader* shader, UINT width, UINT height)
 
 	viewport = new Viewport((float)width, (float)height);
 
-	buffer = new ConstantBuffer(&desc, sizeof(Desc));
+	buffer = new ConstantBuffer(&desc_const_buffer_dynamicCube, sizeof(Desc));
 	sBuffer = shader->AsConstantBuffer("CB_DynamicCube");
 }
 
@@ -113,12 +113,12 @@ void DynamicCubeMap::PreRender(Vector3 & position, Vector3 & scale, float zNear,
 
 		//카메라 변환->결과 : 뷰행렬
 		for (UINT i = 0; i < 6; i++)
-			D3DXMatrixLookAtLH(&desc.Views[i], &position, &lookAt[i].LookAt, &lookAt[i].Up);
+			D3DXMatrixLookAtLH(&desc_const_buffer_dynamicCube.Views[i], &position, &lookAt[i].LookAt, &lookAt[i].Up);
 	}
 	//Perspective(화면비율 1:1)
 	//fov : 기본값 0.5 이므로 90도
 	perspective = new Perspective(1, 1, zNear, zFar, Math::PI * fov);
-	perspective->GetMatrix(&desc.Projection);
+	perspective->GetMatrix(&desc_const_buffer_dynamicCube.Projection);
 
 	buffer->Render();
 	sBuffer->SetConstantBuffer(buffer->Buffer());

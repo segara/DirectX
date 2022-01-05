@@ -23,6 +23,7 @@
     <ClCompile Include="BloomDemo.cpp" />
     <ClCompile Include="BlurDemo.cpp" />
     <ClCompile Include="CubeSkyDemo.cpp" />
+    <ClCompile Include="DynamicCubeMapDemo.cpp" />
     <ClCompile Include="GaussianBlurDemo.cpp" />
     <ClCompile Include="GaussianBlurDemo2.cpp" />
     <ClCompile Include="GetAnimationBoneDemo.cpp" />
@@ -41,6 +42,7 @@
     <ClCompile Include="PointLightingDemo.cpp" />
     <ClCompile Include="ColorToneDemo.cpp" />
     <ClCompile Include="ProjectionDemo.cpp" />
+    <ClCompile Include="ProjectorDemo.cpp" />
     <ClCompile Include="RawBufferDemo.cpp" />
     <ClCompile Include="SpotLightingDemo.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -59,6 +61,7 @@
     <ClInclude Include="BloomDemo.h" />
     <ClInclude Include="BlurDemo.h" />
     <ClInclude Include="CubeSkyDemo.h" />
+    <ClInclude Include="DynamicCubeMapDemo.h" />
     <ClInclude Include="GaussianBlurDemo.h" />
     <ClInclude Include="GaussianBlurDemo2.h" />
     <ClInclude Include="GetAnimationBoneDemo.h" />
@@ -77,6 +80,7 @@
     <ClInclude Include="PointLightingDemo.h" />
     <ClInclude Include="ColorToneDemo.h" />
     <ClInclude Include="ProjectionDemo.h" />
+    <ClInclude Include="ProjectorDemo.h" />
     <ClInclude Include="RawBufferDemo.h" />
     <ClInclude Include="SpotLightingDemo.h" />
     <ClInclude Include="stdafx.h" />

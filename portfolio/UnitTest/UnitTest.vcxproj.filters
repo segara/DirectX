@@ -70,6 +70,8 @@
     <ClCompile Include="GaussianBlurDemo.cpp" />
     <ClCompile Include="GaussianBlurDemo2.cpp" />
     <ClCompile Include="BloomDemo.cpp" />
+    <ClCompile Include="DynamicCubeMapDemo.cpp" />
+    <ClCompile Include="ProjectorDemo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h" />
@@ -141,6 +143,8 @@
     <ClInclude Include="GaussianBlurDemo.h" />
     <ClInclude Include="GaussianBlurDemo2.h" />
     <ClInclude Include="BloomDemo.h" />
+    <ClInclude Include="DynamicCubeMapDemo.h" />
+    <ClInclude Include="ProjectorDemo.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Objects">

@@ -1,7 +1,7 @@
 #pragma once
 class Camera
 {
-private:
+public:
 	Matrix matrix_view;
 private:
 	Vector3 position = Vector3(0, 0, 0);

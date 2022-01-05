@@ -97,13 +97,63 @@ struct MeshOutput
     float4 Position : SV_Position0; //Rasterizing Position
     float3 oPosition : Position1; //Original Position
     float3 wPosition : Position2; //World Position
+    float4 wvpPosition : Position3; //
+    float4 wvpPosition_Sub : Position4;
+    //wvpPosition을 따로 두는 이유:
+    // Position : SV_Position0 SV_Position0은 시스템에 의해 쓰이는 값이므로
+    //일반적으로 사용하지 않는다
+    float3 Normal : Normal;
+    float3 Tangent : Tangent;
+    float2 Uv : Uv;
+    float4 Color : Color; 
+
+};
+
+struct MeshGeometryOutput
+{
+    float4 Position : SV_Position0; //Rasterizing Position
+    float3 oPosition : Position1; //Original Position
+    float3 wPosition : Position2; //World Position
     
     float3 Normal : Normal;
     float3 Tangent : Tangent;
     float2 Uv : Uv;
     float4 Color : Color;
+    
+    uint TargetIndex : SV_RenderTargetArrayIndex;
+      //SV_RenderTargetArrayIndex 
+    //현재 지오메트리에서 처리하는 삼각형이 렌더타겟의 
+    //array 중 몇번에 렌더링할지 결정한다.
+};
+struct MeshProjectorOutput
+{
+    float4 Position : SV_Position0; //Rasterizing Position
+    float3 oPosition : Position1; //Original Position
+    float3 wPosition : Position2; //World Position
+    float3 wvpPosition : Position3; //
+    float3 wvpPosition_Sub : Position4; 
+    
+    float3 Normal : Normal;
+    float3 Tangent : Tangent;
+    float2 Uv : Uv;
+    float4 Color : Color;
+
 };
 
+MeshOutput ConvertMeshOutput(MeshGeometryOutput input)
+{
+    MeshOutput output;
+    
+    output.Position = input.Position;
+    output.oPosition = input.oPosition;
+    output.wPosition = input.wPosition;
+    output.Normal = input.Normal;
+    output.Tangent = input.Tangent;
+    output.Uv = input.Uv;
+    output.Color = input.Color;
+    
+    return output;
+}
 ///////////////////////////////////////////////////////////////////////////////
 
 SamplerState LinearSampler

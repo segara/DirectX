@@ -6,7 +6,7 @@ CubeSky::CubeSky(wstring file, Shader * shader)
 {
 	if (shader == NULL)
 	{
-		this->shader = new Shader(L"29_CubeSky.fx");
+		this->shader = new Shader(L"30_CubeSky.fx");
 		bCreateShader = true;
 	}
 
