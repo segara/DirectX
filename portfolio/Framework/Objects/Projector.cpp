@@ -10,7 +10,7 @@ Projector::Projector(Shader * shader, wstring mapFile, UINT width, UINT height)
 
 	camera->RotationDegree(90, 0, 0);
 	camera->Position(0, 30, 0);
-	//projection = new Orthographic((float)width, (float)height);
+	//  projection = new Orthographic((float)width, (float)height);
 
 
 	map = new Texture(mapFile);

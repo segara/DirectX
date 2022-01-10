@@ -99,6 +99,8 @@ struct MeshOutput
     float3 wPosition : Position2; //World Position
     float4 wvpPosition : Position3; //
     float4 wvpPosition_Sub : Position4;
+    float4 sPosition : Position5; //Light 방향에서의 wvp
+    
     //wvpPosition을 따로 두는 이유:
     // Position : SV_Position0 SV_Position0은 시스템에 의해 쓰이는 값이므로
     //일반적으로 사용하지 않는다

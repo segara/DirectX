@@ -13,13 +13,13 @@
 #include "BlurDemo.h"
 #include "GaussianBlurDemo.h"
 #include "GaussianBlurDemo2.h"
-#include "ProjectorDemo.h"
+#include "ShadowDemo.h"
 
 void Main::Initialize()
 {
 	//Push(new WeatherDemo());
 	//Push(new GaussianBlurDemo());
-	Push(new ProjectorDemo());
+	Push(new ShadowDemo());
 	//Push(new NormalMappingDemo());
 	//Push(new SpotLightingDemo());
 	//Push(new PointLightingDemo());

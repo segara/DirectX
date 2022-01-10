@@ -188,6 +188,9 @@
     <ClCompile Include="Objects\Projector.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="Objects\Shadow.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Environment\Terrain.h">
@@ -355,6 +358,9 @@
       <Filter>Viewer</Filter>
     </ClInclude>
     <ClInclude Include="Objects\Projector.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Shadow.h">
       <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>

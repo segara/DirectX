@@ -28,6 +28,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Shader", "_Shader", "{F814
 		..\_Shaders\107_DynamicCubeMap.fx = ..\_Shaders\107_DynamicCubeMap.fx
 		..\_Shaders\10_Cube.fx = ..\_Shaders\10_Cube.fx
 		..\_Shaders\111_Projector.fx = ..\_Shaders\111_Projector.fx
+		..\_Shaders\113_Shadow.fx = ..\_Shaders\113_Shadow.fx
 		..\_Shaders\11_Texture.fx = ..\_Shaders\11_Texture.fx
 		..\_Shaders\12_TextureSampler.fx = ..\_Shaders\12_TextureSampler.fx
 		..\_Shaders\13_Terrain.fx = ..\_Shaders\13_Terrain.fx

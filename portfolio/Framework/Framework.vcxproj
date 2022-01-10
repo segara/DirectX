@@ -45,6 +45,7 @@
     <ClCompile Include="Objects\Collider.cpp" />
     <ClCompile Include="Objects\DynamicCubeMap.cpp" />
     <ClCompile Include="Objects\Projector.cpp" />
+    <ClCompile Include="Objects\Shadow.cpp" />
     <ClCompile Include="Particle\ParticleSystem.cpp" />
     <ClCompile Include="Renders\Buffer.cpp" />
     <ClCompile Include="Renders\Context.cpp" />
@@ -101,6 +102,7 @@
     <ClInclude Include="Objects\Collider.h" />
     <ClInclude Include="Objects\DynamicCubeMap.h" />
     <ClInclude Include="Objects\Projector.h" />
+    <ClInclude Include="Objects\Shadow.h" />
     <ClInclude Include="Particle\ParticleData.h" />
     <ClInclude Include="Particle\ParticleSystem.h" />
     <ClInclude Include="Renders\Buffer.h" />

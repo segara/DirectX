@@ -114,6 +114,7 @@ typedef D3DXPLANE Plane;
 #include "Objects/Billboard.h"
 #include "Objects/DynamicCubeMap.h"
 #include "Objects/Projector.h"
+#include "Objects/Shadow.h"
 
 #include "Environment/Rain.h"
 #include "Environment/Snow.h"

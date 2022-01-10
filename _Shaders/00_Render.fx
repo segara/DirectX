@@ -20,6 +20,10 @@ output.Position = ViewProjection(output.Position); \
 output.wvpPosition = output.Position; \
 output.wvpPosition_Sub = output.Position; \
 \
+output.sPosition = WorldPosition(input.Position); \
+output.sPosition = mul(output.sPosition, ShadowView); \
+output.sPosition = mul(output.sPosition, ShadowProjection); \
+\
 output.Normal = WorldNormal(input.Normal); \
 output.Tangent = WorldTangent(input.Tangent); \
 \
@@ -28,6 +32,26 @@ output.Color = input.Color;
 
 ////////////////////////////////////////////////////////////////////////////////
 
+struct DepthOutput
+{
+    float4 Position : SV_Position;
+    float4 sPosition : Position1; 
+    //라이팅 방향에서 wvp를 변환한 값을 저장 (라이팅공간에서의 wvp)
+};
+
+float4 PS_Depth(DepthOutput input):SV_Target
+{
+    float depth = input.Position.z / input.Position.w;
+    return float4(depth, depth, depth, 1.0);
+}
+#define VS_DEPTH_GENERATE \
+output.Position = WorldPosition(input.Position); \
+output.Position = mul(output.Position, ShadowView); \
+output.Position = mul(output.Position, ShadowProjection); \
+\
+output.sPosition = output.Position;
+
+////////////////////////////////////////////////////////////////////////////////
 void SetMeshWorld(inout matrix world, VertexMesh input)
 {
     world = input.Transform;
@@ -37,6 +61,15 @@ MeshOutput VS_Mesh(VertexMesh input)
     MeshOutput output;
     SetMeshWorld(World, input);
     VS_GENERATE
+    
+    return output;
+}
+
+DepthOutput VS_Depth_Mesh(VertexMesh input)
+{
+    DepthOutput output;
+    SetMeshWorld(World, input);
+    VS_DEPTH_GENERATE
     
     return output;
 }
@@ -80,6 +113,16 @@ MeshOutput VS_Model(VertexModel input)
     
     SetModelWorld(World, input);
     VS_GENERATE
+    
+    return output;
+}
+
+DepthOutput VS_Depth_Model(VertexModel input)
+{
+    DepthOutput output;
+    
+    SetModelWorld(World, input);
+    VS_DEPTH_GENERATE
     
     return output;
 }
@@ -292,6 +335,24 @@ MeshOutput VS_Animation(VertexModel input)
 
     }
     VS_GENERATE
+    return output;
+}
+
+DepthOutput VS_Depth_Animation(VertexModel input)
+{
+    DepthOutput output;
+    
+    //World = mul(BoneTransforms[BoneIndex], World);
+    if (BlendFrames[input.InstanceID].Mode == 0)
+    {
+        SetAnimationTweenWorld(World, input);
+    }
+    else
+    {
+        SetAnimationBlendWorld(World, input);
+
+    }
+    VS_DEPTH_GENERATE
     return output;
 }
 /////////////////////////////////////////////////////////////////
