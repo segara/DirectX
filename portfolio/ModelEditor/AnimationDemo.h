@@ -15,11 +15,13 @@ public:
 
 private:
 	void Kachujin();
+	void CharacterDummy();
 
 private:
 	Shader* shader;
 	
 	ModelAnimator* kachujin = NULL;
+	ModelAnimator* characterDummy = NULL;
 	
 	Vector3 direction = Vector3(-1, -1, +1);
 };

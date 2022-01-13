@@ -31,13 +31,13 @@ float4 PS(MeshOutput input):SV_Target
     if(ShadowQuality == 0)
     {
         depth = ShadowMap.Sample(LinearSampler, position.xy).r; //스텐실 텍스쳐 포맷이 R만씀
-        //depth >= z (depth텍스쳐의 z가 같거나 더큰경우(같거나 더 먼경우) : 밝은부분)
+        //depth >= z (depth텍스쳐의 depth >= 뷰의 z : 밝은부분)
         //depth < z (현재 빛과 vertex.z 거리가 depth텍스쳐의 z보다 더큰경우(먼경우) : 어두운부분)
-        factor = (float) (depth >= z);
+        factor = (float) (depth >= z+0.0001f);
     }
     else if (ShadowQuality == 1)
     {
-        depth = position.z;
+        depth = position.z + 0.0001f;
         //SampleCmpLevelZero : mipmap사용하지 않음
         //sampler 생성시
         //desc.ComparisonFunc = D3D11_COMPARISON_LESS_EQUAL; //비교값이 작거나 같은가
@@ -48,7 +48,7 @@ float4 PS(MeshOutput input):SV_Target
     }
     else if (ShadowQuality == 2) //PCF + Blur
     {
-        depth = position.z;
+        depth = position.z + 0.0001f;
         
         float2 size = 1.0f / ShadowMapSize;
         float2 offsets[] =

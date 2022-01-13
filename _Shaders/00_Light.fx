@@ -86,7 +86,7 @@ void ComputeLight(out MaterialDesc output, float3 normal, float3 wPosition)
     [flatten]
     if (NdotL > 0.0f)
     {
-        output.Diffuse = Material.Diffuse * NdotL;
+        output.Diffuse = (Material.Diffuse * NdotL)*0.65f + 0.2f;
         
         [flatten]
         if(Material.Specular.a > 0.0f) //alpha 에 강도값이 들어감

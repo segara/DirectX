@@ -12,24 +12,18 @@ void WeatherDemo::Initialize()
 	rain = new Rain(Vector3(300, 100, 500), (UINT)1e+4f,L"Environment/Rain.png"); //1e+4f:10000
 	snow = new Snow(Vector3(300, 100, 500), (UINT)1e+5f, L"Environment/Snow.png"); //1e+4f:10000
 
-	//Performance performance;
-	//performance.Start();
 
 	shader = new Shader(L"82_NormalMapping.fx");
 
 
-	//float t = performance.End();
-
-	//MessageBox(D3D::GetDesc().Handle, to_wstring(t).c_str(), L"", MB_OK);
-
-	Mesh();
-	Airplane();
-	Kachujin();
-	Colliders();
-	Weapon();
+	//Mesh();
+	//Airplane();
+	//Kachujin();
+	//Colliders();
+	//Weapon();
 	CreatePointLight();
 	CreateSpotLight();
-	CreateBillboard();
+	//CreateBillboard();
 }
 
 
@@ -90,73 +84,72 @@ void WeatherDemo::Update()
 
 	ImGui::SliderFloat3("light Position", Context::Get()->Position(), -10, 10);
 	ImGui::SliderFloat3("light Direction", Context::Get()->Direction(), -1, 1);
-	//Weapon
-	{
-		Vector3 position;
-		weaponInitTransform->Position(&position);
-		ImGui::SliderFloat3("Weapon Position", position, -20, 20);
+	////Weapon
+	//{
+	//	Vector3 position;
+	//	weaponInitTransform->Position(&position);
+	//	ImGui::SliderFloat3("Weapon Position", position, -20, 20);
 
-		Vector3 scale;
-		weaponInitTransform->Scale(&scale);
-		ImGui::SliderFloat3("Weapon Scale", scale, 0.1f, 3.0f);
+	//	Vector3 scale;
+	//	weaponInitTransform->Scale(&scale);
+	//	ImGui::SliderFloat3("Weapon Scale", scale, 0.1f, 3.0f);
 
-		Vector3 rotation;
-		weaponInitTransform->Rotation(&rotation);
-		ImGui::SliderFloat3("Weapon Rotation", rotation, -1.0f, 1.0f);
+	//	Vector3 rotation;
+	//	weaponInitTransform->Rotation(&rotation);
+	//	ImGui::SliderFloat3("Weapon Rotation", rotation, -1.0f, 1.0f);
 
-		weaponInitTransform->Position(position);
-		weaponInitTransform->Scale(scale);
-		weaponInitTransform->Rotation(rotation);
-	}
-	//Collider
-	{
-		Vector3 position;
-		colliderInitTransforms->Position(&position);
-		ImGui::SliderFloat3("Collider Position", position, -20, 20);
+	//	weaponInitTransform->Position(position);
+	//	weaponInitTransform->Scale(scale);
+	//	weaponInitTransform->Rotation(rotation);
+	//}
+	////Collider
+	//{
+	//	Vector3 position;
+	//	colliderInitTransforms->Position(&position);
+	//	ImGui::SliderFloat3("Collider Position", position, -20, 20);
 
-		Vector3 scale;
-		colliderInitTransforms->Scale(&scale);
-		ImGui::SliderFloat3("Collider Scale", scale, 10.0f, 100.0f);
+	//	Vector3 scale;
+	//	colliderInitTransforms->Scale(&scale);
+	//	ImGui::SliderFloat3("Collider Scale", scale, 10.0f, 100.0f);
 
-		Vector3 rotation;
-		colliderInitTransforms->Rotation(&rotation);
-		ImGui::SliderFloat3("Collider Rotation", rotation, -1.0f, 1.0f);
+	//	Vector3 rotation;
+	//	colliderInitTransforms->Rotation(&rotation);
+	//	ImGui::SliderFloat3("Collider Rotation", rotation, -1.0f, 1.0f);
 
-		colliderInitTransforms->Position(position);
-		colliderInitTransforms->Scale(scale);
-		colliderInitTransforms->Rotation(rotation);
-	}
+	//	colliderInitTransforms->Position(position);
+	//	colliderInitTransforms->Scale(scale);
+	//	colliderInitTransforms->Rotation(rotation);
+	//}
 
-	//ImGui::SliderFloat3("Light Direction", Context::Get()->Direction(), -1, +1);
 	cubeSky->Update();
 
-	cube->Update();
-	grid->Update();
-	sphere->Update();
-	cylinder->Update();
+	//cube->Update();
+	//grid->Update();
+	//sphere->Update();
+	//cylinder->Update();
 
-	airplane->Update();
-	kachujin->Update();
+	//airplane->Update();
+	//kachujin->Update();
 
-	Matrix world[MAX_MODEL_TRANSFORMS];
+	//Matrix world[MAX_MODEL_TRANSFORMS];
 
-	for (UINT i = 0; i < kachujin->GetTransformCount(); ++i)
-	{
-		//Matrix attach;
-		//kachujin->GetAttachTransform(i, &attach);
+	//for (UINT i = 0; i < kachujin->GetTransformCount(); ++i)
+	//{
+	//	//Matrix attach;
+	//	//kachujin->GetAttachTransform(i, &attach);
 
-		//colliders[i]->Collider->GetTransform()->World(attach);
-		//colliders[i]->Collider->Update();
-		kachujin->GetAttachTransform(i, world); //모델의 전체 본을 얻어온다.
+	//	//colliders[i]->Collider->GetTransform()->World(attach);
+	//	//colliders[i]->Collider->Update();
+	//	kachujin->GetAttachTransform(i, world); //모델의 전체 본을 얻어온다.
 
-		colliders[i]->Collider->GetTransform()->World(world[40]);
-		colliders[i]->Collider->Update();
+	//	colliders[i]->Collider->GetTransform()->World(world[40]);
+	//	colliders[i]->Collider->Update();
 
-		weapon->GetTransform(i)->World(weaponInitTransform->World() * world[40]);
-	}
-	weapon->UpdateTransforms();
-	weapon->Update();
-	billboard->Update();
+	//	weapon->GetTransform(i)->World(weaponInitTransform->World() * world[40]);
+	//}
+	//weapon->UpdateTransforms();
+	//weapon->Update();
+	//billboard->Update();
 
 	UINT WeatherSelected = (UINT)weatherType;
 	ImGui::Separator();
@@ -165,8 +158,8 @@ void WeatherDemo::Update()
 	weatherType = (WeatherType)WeatherSelected;
 	switch (weatherType)
 	{
-	case WeatherType::Rain: rain->Update(); break;
-	case WeatherType::Snow: snow->Update(); break;
+		case WeatherType::Rain: rain->Update(); break;
+		case WeatherType::Snow: snow->Update(); break;
 	}
 }
 
@@ -178,32 +171,32 @@ void WeatherDemo::Render()
 
 	//wall 메터리얼을 쉐이더에 밀어넣고
 	//위의 wall로 렌더링
-	wall->Render(); ;
-	
-	sphere->Render();
+	//wall->Render(); ;
+	//
+	//sphere->Render();
 
 
-	brick->Render();
-	cylinder->Render();
+	//brick->Render();
+	//cylinder->Render();
 
-	stone->Render();
-	cube->Render();
+	//stone->Render();
+	//cube->Render();
 
-	floor->Render();
-	grid->Render();
+	//floor->Render();
+	//grid->Render();
 
-	airplane->Render();
-	kachujin->Render();
-	for (UINT i = 0; i < kachujin->GetTransformCount(); ++i)
-	{
-		colliders[i]->Collider->Render();
-	}
-	weapon->Render();
-	billboard->Render();
+	//airplane->Render();
+	//kachujin->Render();
+	//for (UINT i = 0; i < kachujin->GetTransformCount(); ++i)
+	//{
+	//	colliders[i]->Collider->Render();
+	//}
+	//weapon->Render();
+	//billboard->Render();
 	switch (weatherType)
 	{
-	case WeatherType::Rain: rain->Render(); break;
-	case WeatherType::Snow: snow->Render(); break;
+		case WeatherType::Rain: rain->Render(); break;
+		case WeatherType::Snow: snow->Render(); break;
 	}
 }
 
@@ -240,26 +233,26 @@ void WeatherDemo::Kachujin()
 	transform->Scale(0.075f, 0.075f, 0.075f);
 	kachujin->PlayTweenMode(0, 0, 1.0f);
 
-	transform = kachujin->AddTransform();
-	transform->Position(-15, 0, -30);
-	transform->Scale(0.075f, 0.075f, 0.075f);
-	kachujin->PlayTweenMode(1, 1, 1.0f);
+	//transform = kachujin->AddTransform();
+	//transform->Position(-15, 0, -30);
+	//transform->Scale(0.075f, 0.075f, 0.075f);
+	//kachujin->PlayTweenMode(1, 1, 1.0f);
 
-	transform = kachujin->AddTransform();
-	transform->Position(-30, 0, -30);
-	transform->Scale(0.075f, 0.075f, 0.075f);
-	kachujin->PlayTweenMode(2, 2, 0.75f);
+	//transform = kachujin->AddTransform();
+	//transform->Position(-30, 0, -30);
+	//transform->Scale(0.075f, 0.075f, 0.075f);
+	//kachujin->PlayTweenMode(2, 2, 0.75f);
 
-	transform = kachujin->AddTransform();
-	transform->Position(15, 0, -30);
-	transform->Scale(0.075f, 0.075f, 0.075f);
-	kachujin->PlayBlendMode(3, 0, 1, 2);
-	kachujin->SetBlendAlpha(3, 1.5f);
+	//transform = kachujin->AddTransform();
+	//transform->Position(15, 0, -30);
+	//transform->Scale(0.075f, 0.075f, 0.075f);
+	//kachujin->PlayBlendMode(3, 0, 1, 2);
+	//kachujin->SetBlendAlpha(3, 1.5f);
 
-	transform = kachujin->AddTransform();
-	transform->Position(30, 0, -32.5f);
-	transform->Scale(0.075f, 0.075f, 0.075f);
-	kachujin->PlayTweenMode(4, 4, 0.75f);
+	//transform = kachujin->AddTransform();
+	//transform->Position(30, 0, -32.5f);
+	//transform->Scale(0.075f, 0.075f, 0.075f);
+	//kachujin->PlayTweenMode(4, 4, 0.75f);
 
 	kachujin->UpdateTransforms();
 	//kachujin->SetAttachTransform(40); //transform을 구할 본의 인덱스를 지정:40 ->손부분
@@ -345,6 +338,10 @@ void WeatherDemo::CreateSpotLight()
 void WeatherDemo::CreateBillboard()
 {
 	billboard = new Billboard(shader);
+	billboard->AddTexture(L"Terrain/grass_14.tga");
+	billboard->AddTexture(L"Terrain/grass_07.tga");
+	billboard->AddTexture(L"Terrain/grass_11.tga");
+
 	for (UINT i = 0; i < 1200; i++)
 	{
 		Vector2 scale = Math::RandomVec2(1, 3);

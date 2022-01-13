@@ -9,8 +9,6 @@ void GaussianBlurDemo2::Initialize()
 	Context::Get()->GetCamera()->Position(1, 36, -85);
 	cubeSky = new CubeSky(L"Environment/GrassCube1024.dds");
 
-	//Performance performance;
-	//performance.Start();
 
 	shader = new Shader(L"96_Billboard.fx");
 
@@ -25,17 +23,10 @@ void GaussianBlurDemo2::Initialize()
 	render2D->GetTransform()->Scale(355.0f, 200, 1);
 	render2D->GetTransform()->Position(200, 120, 0);
 	render2D->SRV(renderTarget[0]->SRV());
-	//float t = performance.End();
 
 	postEffect = new PostEffect(L"105_GaussianBlur.fx");
-	//postEffect->SRV(renderTarget->SRV());
-	//MessageBox(D3D::GetDesc().Handle, to_wstring(t).c_str(), L"", MB_OK);
 
 	Mesh();
-	Airplane();
-	Kachujin();
-	Colliders();
-	Weapon();
 	CreatePointLight();
 	CreateSpotLight();
 	CreateBillboard();
@@ -54,132 +45,66 @@ void GaussianBlurDemo2::Destroy()
 
 void GaussianBlurDemo2::Update()
 {
-	
-
 
 	//UV 기준으로 pixel사이즈 계산 
 	Vector2 PixelSize = Vector2(1.0f / D3D::Width(), 1.0f / D3D::Height());
 	postEffect->GetShader()->AsVector("PixelSize")->SetFloatVector(PixelSize);
 
-	//static UINT selected = 0;
-	//ImGui::InputInt("NormalMap Selected", (int *)&selected);
-	//selected %= 4;
-
-	//shader->AsScalar("Selected")->SetInt(selected);
-
-	////SpotLight
-	//{
-	//	static UINT spotIndex = 0;
-	//	ImGui::InputInt("SpotLight Index", (int *)&spotIndex);
-	//	spotIndex %= Lighting::Get()->SpotLightCount();
-
-
-	//	SpotLight& spotLight = Lighting::Get()->GetSpotLight(spotIndex);
-
-	//	ImGui::ColorEdit3("SpotLight Ambient", spotLight.Ambient);
-	//	ImGui::ColorEdit3("SpotLight Diffuse", spotLight.Diffuse);
-	//	ImGui::ColorEdit3("SpotLight Specular", spotLight.Specular);
-	//	ImGui::ColorEdit3("SpotLight Emissive", spotLight.Emissive);
-
-	//	ImGui::SliderFloat3("SpotLight Position", spotLight.Position, -50, 50);
-	//	ImGui::SliderFloat("SpotLight Range", &spotLight.Range, 0, 30);
-
-	//	ImGui::SliderFloat3("SpotLight Direciton", spotLight.Direction, -1, 1);
-	//	ImGui::SliderFloat("SpotLight Angle", &spotLight.Angle, 1, 90);
-
-	//	ImGui::SliderFloat("SpotLight Intensity", &spotLight.Intensity, 0, 1);
-	//}
-
-	//PointLight& pointLight = Lighting::Get()->GetPointLight(0);
-	//ImGui::Begin("Point Lighting");
-	//{
-	//	ImGui::ColorEdit3("Ambient", pointLight.Ambient);
-	//	ImGui::ColorEdit3("Diffuse", pointLight.Diffuse);
-	//	ImGui::ColorEdit3("Specular", pointLight.Specular);
-	//	ImGui::ColorEdit3("Emissive", pointLight.Emissive);
-
-	//	ImGui::SliderFloat3("Position", pointLight.Position, -50, 50);
-	//	ImGui::SliderFloat("Range", &pointLight.Range, 0, 20);
-	//	ImGui::SliderFloat("Intensity", &pointLight.intensity, 0, 1);
-	//}
-	//ImGui::End();
-
 	ImGui::SliderFloat3("light Position", Context::Get()->Position(), -10, 10);
 	ImGui::SliderFloat3("light Direction", Context::Get()->Direction(), -1, 1);
-	//Weapon
+
+	//SpotLight
 	{
-		Vector3 position;
-		weaponInitTransform->Position(&position);
-		ImGui::SliderFloat3("Weapon Position", position, -20, 20);
+		static UINT spotIndex = 0;
+		ImGui::InputInt("SpotLight Index", (int *)&spotIndex);
+		spotIndex %= Lighting::Get()->SpotLightCount();
 
-		Vector3 scale;
-		weaponInitTransform->Scale(&scale);
-		ImGui::SliderFloat3("Weapon Scale", scale, 0.1f, 3.0f);
 
-		Vector3 rotation;
-		weaponInitTransform->Rotation(&rotation);
-		ImGui::SliderFloat3("Weapon Rotation", rotation, -1.0f, 1.0f);
+		SpotLight& spotLight = Lighting::Get()->GetSpotLight(spotIndex);
 
-		weaponInitTransform->Position(position);
-		weaponInitTransform->Scale(scale);
-		weaponInitTransform->Rotation(rotation);
-	}
-	//Collider
-	{
-		Vector3 position;
-		colliderInitTransforms->Position(&position);
-		ImGui::SliderFloat3("Collider Position", position, -20, 20);
+		ImGui::ColorEdit3("SpotLight Ambient", spotLight.Ambient);
+		ImGui::ColorEdit3("SpotLight Diffuse", spotLight.Diffuse);
+		ImGui::ColorEdit3("SpotLight Specular", spotLight.Specular);
+		ImGui::ColorEdit3("SpotLight Emissive", spotLight.Emissive);
 
-		Vector3 scale;
-		colliderInitTransforms->Scale(&scale);
-		ImGui::SliderFloat3("Collider Scale", scale, 10.0f, 100.0f);
+		ImGui::SliderFloat3("SpotLight Position", spotLight.Position, -50, 50);
+		ImGui::SliderFloat("SpotLight Range", &spotLight.Range, 0, 30);
 
-		Vector3 rotation;
-		colliderInitTransforms->Rotation(&rotation);
-		ImGui::SliderFloat3("Collider Rotation", rotation, -1.0f, 1.0f);
+		ImGui::SliderFloat3("SpotLight Direciton", spotLight.Direction, -1, 1);
+		ImGui::SliderFloat("SpotLight Angle", &spotLight.Angle, 1, 90);
 
-		colliderInitTransforms->Position(position);
-		colliderInitTransforms->Scale(scale);
-		colliderInitTransforms->Rotation(rotation);
+		ImGui::SliderFloat("SpotLight Intensity", &spotLight.Intensity, 0, 1);
 	}
 
-	//ImGui::SliderFloat3("Light Direction", Context::Get()->Direction(), -1, +1);
+	PointLight& pointLight = Lighting::Get()->GetPointLight(0);
+	ImGui::Begin("Point Lighting");
+	{
+		ImGui::ColorEdit3("Ambient", pointLight.Ambient);
+		ImGui::ColorEdit3("Diffuse", pointLight.Diffuse);
+		ImGui::ColorEdit3("Specular", pointLight.Specular);
+		ImGui::ColorEdit3("Emissive", pointLight.Emissive);
+
+		ImGui::SliderFloat3("Position", pointLight.Position, -50, 50);
+		ImGui::SliderFloat("Range", &pointLight.Range, 0, 20);
+		ImGui::SliderFloat("Intensity", &pointLight.intensity, 0, 1);
+	}
+	ImGui::End();
+
+
 	cubeSky->Update();
-
-	cube->Update();
+	//cube->Update();
 	grid->Update();
 	sphere->Update();
 	cylinder->Update();
-
-	airplane->Update();
-	kachujin->Update();
-
-	Matrix world[MAX_MODEL_TRANSFORMS];
-
-	for (UINT i = 0; i < kachujin->GetTransformCount(); ++i)
-	{
-		//Matrix attach;
-		//kachujin->GetAttachTransform(i, &attach);
-
-		//colliders[i]->Collider->GetTransform()->World(attach);
-		//colliders[i]->Collider->Update();
-		kachujin->GetAttachTransform(i, world); //모델의 전체 본을 얻어온다.
-
-		colliders[i]->Collider->GetTransform()->World(world[40]);
-		colliders[i]->Collider->Update();
-
-		weapon->GetTransform(i)->World(weaponInitTransform->World() * world[40]);
-	}
-	weapon->UpdateTransforms();
-	weapon->Update();
 	billboard->Update();
+
 	render2D->Update(); 
 	postEffect->Update();
 }
 
 void GaussianBlurDemo2::PreRender()
 {
-	renderTarget[0]->PreRender(depthStencil); //backbuffer에 렌더타겟을 셋팅
+	renderTarget[0]->PreRender(depthStencil); //backbuffer에 렌더타겟(renderTarget[0])을 셋팅
 
 	////////////////////////////////////////////////////////////
 	//뷰표트를 셋팅 :D3D::GetDC()->RSSetViewports(1, &viewport);
@@ -194,29 +119,17 @@ void GaussianBlurDemo2::PreRender()
 
 		Pass(0, 1, 2);
 
-		//wall 메터리얼을 쉐이더에 밀어넣고
-		//위의 wall로 렌더링
 		wall->Render(); ;
-
 		sphere->Render();
-
-
 		brick->Render();
 		cylinder->Render();
 
 		stone->Render();
-		cube->Render();
+		//cube->Render();
 
 		floor->Render();
 		grid->Render();
 
-		airplane->Render();
-		kachujin->Render();
-		for (UINT i = 0; i < kachujin->GetTransformCount(); ++i)
-		{
-			colliders[i]->Collider->Render();
-		}
-		weapon->Render();
 		billboard->Render();
 	}
 
@@ -227,7 +140,9 @@ void GaussianBlurDemo2::PreRender()
 		temp[1] = renderTarget[2];
 
 		RenderTarget::PreMultiRender(temp, 2, depthStencil);
-		//여기까지 셋팅했을때 렌더링 결과는 rendertarget 첫번째가 backbuffer에 셋팅
+		//여기까지 셋팅했을때 
+		// renderTarget[1] : x축 블러용
+		// renderTarget[2] : y축 블러용
 		postEffect->Pass(1); //pass1 : PS_GaussianBlurMultiRenderTarget
 		
 		postEffect->SRV(renderTarget[0]->SRV());
@@ -247,7 +162,7 @@ void GaussianBlurDemo2::PreRender()
 		postEffect->Pass(2); //pass2 : PS_GaussianCombined
 		postEffect->GetShader()->AsSRV("GaussianMrt")->SetResourceArray(srvs, 0, 2);
 	
-		//PostRender 에서 렌더링
+		//postEffect->Render(); //renderTarget[0]에 렌더
 	}
 
 }
@@ -261,15 +176,33 @@ void GaussianBlurDemo2::Render()
 
 void GaussianBlurDemo2::PostRender()
 {
-	// postEffect->Pass(0);
-	//순차적으로 렌더링됨
-	//postEffect->SRV(renderTarget[0]->SRV());
+	/// Window.cpp code
+	/// Prerender 후 렌더타겟 클리어 작업이 존재하여 
+	/// 한번더 렌더를 돌림
+	//mainExecute->PreRender();
 
-	//postEffect->SRV(renderTarget->SRV());
-	postEffect->Render();
+	//D3DDesc desc = D3D::GetDesc();
 
-	//render2D->SRV(renderTarget->SRV());
+	//D3D::Get()->SetRenderTarget();
+	//D3D::Get()->Clear(desc.Background);
+	//{
+	//	Context::Get()->Render();
+
+	//	mainExecute->Render();
+	//	...
+	//}
+	if (Keyboard::Get()->Down(VK_SPACE)) {
+		renderTarget[0]->SaveTexture(L"../RenderTarget00.png");
+		renderTarget[1]->SaveTexture(L"../RenderTarget01.png");
+		renderTarget[2]->SaveTexture(L"../RenderTarget02.png");
+	}
+		
+	
+	postEffect->Render(); 
+
+	render2D->SRV(renderTarget[1]->SRV());
 	render2D->Render();
+
 }
 
 void GaussianBlurDemo2::Airplane()
@@ -305,26 +238,26 @@ void GaussianBlurDemo2::Kachujin()
 	transform->Scale(0.075f, 0.075f, 0.075f);
 	kachujin->PlayTweenMode(0, 0, 1.0f);
 
-	transform = kachujin->AddTransform();
-	transform->Position(-15, 0, -30);
-	transform->Scale(0.075f, 0.075f, 0.075f);
-	kachujin->PlayTweenMode(1, 1, 1.0f);
+	//transform = kachujin->AddTransform();
+	//transform->Position(-15, 0, -30);
+	//transform->Scale(0.075f, 0.075f, 0.075f);
+	//kachujin->PlayTweenMode(1, 1, 1.0f);
 
-	transform = kachujin->AddTransform();
-	transform->Position(-30, 0, -30);
-	transform->Scale(0.075f, 0.075f, 0.075f);
-	kachujin->PlayTweenMode(2, 2, 0.75f);
+	//transform = kachujin->AddTransform();
+	//transform->Position(-30, 0, -30);
+	//transform->Scale(0.075f, 0.075f, 0.075f);
+	//kachujin->PlayTweenMode(2, 2, 0.75f);
 
-	transform = kachujin->AddTransform();
-	transform->Position(15, 0, -30);
-	transform->Scale(0.075f, 0.075f, 0.075f);
-	kachujin->PlayBlendMode(3, 0, 1, 2);
-	kachujin->SetBlendAlpha(3, 1.5f);
+	//transform = kachujin->AddTransform();
+	//transform->Position(15, 0, -30);
+	//transform->Scale(0.075f, 0.075f, 0.075f);
+	//kachujin->PlayBlendMode(3, 0, 1, 2);
+	//kachujin->SetBlendAlpha(3, 1.5f);
 
-	transform = kachujin->AddTransform();
-	transform->Position(30, 0, -32.5f);
-	transform->Scale(0.075f, 0.075f, 0.075f);
-	kachujin->PlayTweenMode(4, 4, 0.75f);
+	//transform = kachujin->AddTransform();
+	//transform->Position(30, 0, -32.5f);
+	//transform->Scale(0.075f, 0.075f, 0.075f);
+	//kachujin->PlayTweenMode(4, 4, 0.75f);
 
 	kachujin->UpdateTransforms();
 	//kachujin->SetAttachTransform(40); //transform을 구할 본의 인덱스를 지정:40 ->손부분

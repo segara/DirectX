@@ -16,6 +16,18 @@
     <ClCompile Include="MeshDemo.cpp">
       <Filter>Demo</Filter>
     </ClCompile>
+    <ClCompile Include="..\UnitTest\WorldDemo2.cpp">
+      <Filter>Demo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\UnitTest\WorldDemo3.cpp">
+      <Filter>Demo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\UnitTest\WorldDemo.cpp">
+      <Filter>Demo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\UnitTest\GetVerticalRaycast.cpp">
+      <Filter>Demo</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h" />
@@ -32,6 +44,18 @@
       <Filter>Demo</Filter>
     </ClInclude>
     <ClInclude Include="MeshDemo.h">
+      <Filter>Demo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\UnitTest\WorldDemo.h">
+      <Filter>Demo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\UnitTest\WorldDemo2.h">
+      <Filter>Demo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\UnitTest\WorldDemo3.h">
+      <Filter>Demo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\UnitTest\GetVerticalRaycast.h">
       <Filter>Demo</Filter>
     </ClInclude>
   </ItemGroup>

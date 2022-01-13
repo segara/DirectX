@@ -1,6 +1,9 @@
 #include "Framework.h"
 #include "ModelAnimator.h"
 
+ModelAnimator::ModelAnimator()
+{
+}
 
 ModelAnimator::ModelAnimator(Shader* shader) :shader(shader)
 {

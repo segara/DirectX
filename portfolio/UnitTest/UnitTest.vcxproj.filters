@@ -73,6 +73,12 @@
     <ClCompile Include="DynamicCubeMapDemo.cpp" />
     <ClCompile Include="ProjectorDemo.cpp" />
     <ClCompile Include="ShadowDemo.cpp" />
+    <ClCompile Include="CharacterControllDemo.cpp" />
+    <ClCompile Include="CharacterControllDemo\Character.cpp">
+      <Filter>CharacterControllDemo</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldDemo.cpp" />
+    <ClCompile Include="HeightMapDemo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h" />
@@ -147,6 +153,12 @@
     <ClInclude Include="DynamicCubeMapDemo.h" />
     <ClInclude Include="ProjectorDemo.h" />
     <ClInclude Include="ShadowDemo.h" />
+    <ClInclude Include="CharacterControllDemo.h" />
+    <ClInclude Include="CharacterControllDemo\Character.h">
+      <Filter>CharacterControllDemo</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldDemo.h" />
+    <ClInclude Include="HeightMapDemo.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Objects">
@@ -169,6 +181,9 @@
     </Filter>
     <Filter Include="PostEffects">
       <UniqueIdentifier>{ac8b895b-75a9-46ea-ac86-45336fc62970}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CharacterControllDemo">
+      <UniqueIdentifier>{cc85be14-7316-4d55-bc4e-719edcfdee68}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

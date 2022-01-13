@@ -14,12 +14,18 @@
 #include "GaussianBlurDemo.h"
 #include "GaussianBlurDemo2.h"
 #include "ShadowDemo.h"
+#include "HeightMapDemo.h"
+#include "DynamicCubeMapDemo.h"
+#include "ThreadDemo.h"
+#include "CharacterControllDemo.h"
 
 void Main::Initialize()
 {
 	//Push(new WeatherDemo());
 	//Push(new GaussianBlurDemo());
-	Push(new ShadowDemo());
+	//Push(new ShadowDemo());
+	Push(new CharacterControllDemo());
+
 	//Push(new NormalMappingDemo());
 	//Push(new SpotLightingDemo());
 	//Push(new PointLightingDemo());

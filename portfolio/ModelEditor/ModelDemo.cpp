@@ -40,8 +40,8 @@ void ModelDemo::Tank()
 void ModelDemo::Kachujin()
 {
 	kachujin = new ModelRender(shader);
-	kachujin->ReadMesh(L"Kachujin/Mesh");
-	kachujin->ReadMaterial(L"Kachujin/Mesh");
+	kachujin->ReadMesh(L"CharDummy/Mesh");
+	kachujin->ReadMaterial(L"CharDummy/Mesh");
 	kachujin->AddTransform();
 	kachujin->GetTransform(0)->Position(0, 0, 0);
 	kachujin->GetTransform(0)->Scale(0.025f, 0.025f, 0.025f);

@@ -20,10 +20,10 @@ void DynamicCubeMapDemo::Initialize()
 	//MessageBox(D3D::GetDesc().Handle, to_wstring(t).c_str(), L"", MB_OK);
 
 	Mesh();
-	Airplane();
-	Kachujin();
-	Colliders();
-	Weapon();
+	//Airplane();
+	//Kachujin();
+	//Colliders();
+	//Weapon();
 	CreatePointLight();
 	CreateSpotLight();
 	CreateBillboard();
@@ -107,44 +107,43 @@ void DynamicCubeMapDemo::Update()
 
 	ImGui::SliderFloat3("light Position", Context::Get()->Position(), -10, 10);
 	ImGui::SliderFloat3("light Direction", Context::Get()->Direction(), -1, 1);
-	//Weapon
-	{
-		Vector3 position;
-		weaponInitTransform->Position(&position);
-		ImGui::SliderFloat3("Weapon Position", position, -20, 20);
+	////Weapon
+	//{
+	//	Vector3 position;
+	//	weaponInitTransform->Position(&position);
+	//	ImGui::SliderFloat3("Weapon Position", position, -20, 20);
 
-		Vector3 scale;
-		weaponInitTransform->Scale(&scale);
-		ImGui::SliderFloat3("Weapon Scale", scale, 0.1f, 3.0f);
+	//	Vector3 scale;
+	//	weaponInitTransform->Scale(&scale);
+	//	ImGui::SliderFloat3("Weapon Scale", scale, 0.1f, 3.0f);
 
-		Vector3 rotation;
-		weaponInitTransform->Rotation(&rotation);
-		ImGui::SliderFloat3("Weapon Rotation", rotation, -1.0f, 1.0f);
+	//	Vector3 rotation;
+	//	weaponInitTransform->Rotation(&rotation);
+	//	ImGui::SliderFloat3("Weapon Rotation", rotation, -1.0f, 1.0f);
 
-		weaponInitTransform->Position(position);
-		weaponInitTransform->Scale(scale);
-		weaponInitTransform->Rotation(rotation);
-	}
-	//Collider
-	{
-		Vector3 position;
-		colliderInitTransforms->Position(&position);
-		ImGui::SliderFloat3("Collider Position", position, -20, 20);
+	//	weaponInitTransform->Position(position);
+	//	weaponInitTransform->Scale(scale);
+	//	weaponInitTransform->Rotation(rotation);
+	//}
+	////Collider
+	//{
+	//	Vector3 position;
+	//	colliderInitTransforms->Position(&position);
+	//	ImGui::SliderFloat3("Collider Position", position, -20, 20);
 
-		Vector3 scale;
-		colliderInitTransforms->Scale(&scale);
-		ImGui::SliderFloat3("Collider Scale", scale, 10.0f, 100.0f);
+	//	Vector3 scale;
+	//	colliderInitTransforms->Scale(&scale);
+	//	ImGui::SliderFloat3("Collider Scale", scale, 10.0f, 100.0f);
 
-		Vector3 rotation;
-		colliderInitTransforms->Rotation(&rotation);
-		ImGui::SliderFloat3("Collider Rotation", rotation, -1.0f, 1.0f);
+	//	Vector3 rotation;
+	//	colliderInitTransforms->Rotation(&rotation);
+	//	ImGui::SliderFloat3("Collider Rotation", rotation, -1.0f, 1.0f);
 
-		colliderInitTransforms->Position(position);
-		colliderInitTransforms->Scale(scale);
-		colliderInitTransforms->Rotation(rotation);
-	}
+	//	colliderInitTransforms->Position(position);
+	//	colliderInitTransforms->Scale(scale);
+	//	colliderInitTransforms->Rotation(rotation);
+	//}
 
-	//ImGui::SliderFloat3("Light Direction", Context::Get()->Direction(), -1, +1);
 	cubeSky->Update();
 
 	cube->Update();
@@ -153,27 +152,22 @@ void DynamicCubeMapDemo::Update()
 	sphere_dynamicCubeMap->Update();
 	cylinder->Update();
 
-	airplane->Update();
-	kachujin->Update();
+	//airplane->Update();
+	//kachujin->Update();
 
-	Matrix world[MAX_MODEL_TRANSFORMS];
+	//Matrix world[MAX_MODEL_TRANSFORMS];
 
-	for (UINT i = 0; i < kachujin->GetTransformCount(); ++i)
-	{
-		//Matrix attach;
-		//kachujin->GetAttachTransform(i, &attach);
+	//for (UINT i = 0; i < kachujin->GetTransformCount(); ++i)
+	//{
+	//	kachujin->GetAttachTransform(i, world); //모델의 전체 본을 얻어온다.
 
-		//colliders[i]->Collider->GetTransform()->World(attach);
-		//colliders[i]->Collider->Update();
-		kachujin->GetAttachTransform(i, world); //모델의 전체 본을 얻어온다.
+	//	colliders[i]->Collider->GetTransform()->World(world[40]);
+	//	colliders[i]->Collider->Update();
 
-		colliders[i]->Collider->GetTransform()->World(world[40]);
-		colliders[i]->Collider->Update();
-
-		weapon->GetTransform(i)->World(weaponInitTransform->World() * world[40]);
-	}
-	weapon->UpdateTransforms();
-	weapon->Update();
+	//	weapon->GetTransform(i)->World(weaponInitTransform->World() * world[40]);
+	//}
+	//weapon->UpdateTransforms();
+	//weapon->Update();
 	billboard->Update();
 	
 }
@@ -210,14 +204,14 @@ void DynamicCubeMapDemo::PreRender()
 		floor->Render();
 		grid->Render();
 
-		airplane->Render();
-		kachujin->Render();
-		for (UINT i = 0; i < kachujin->GetTransformCount(); ++i)
-		{
-			colliders[i]->Collider->Render();
-		}
-		weapon->Render();
-		//billboard->Render();
+		//airplane->Render();
+		//kachujin->Render();
+		//for (UINT i = 0; i < kachujin->GetTransformCount(); ++i)
+		//{
+		//	colliders[i]->Collider->Render();
+		//}
+		//weapon->Render();
+		billboard->Render();
 	}
 	
 
@@ -256,13 +250,13 @@ void DynamicCubeMapDemo::Render()
 		floor->Render();
 		grid->Render();
 
-		airplane->Render();
-		kachujin->Render();
-		for (UINT i = 0; i < kachujin->GetTransformCount(); ++i)
-		{
-			colliders[i]->Collider->Render();
-		}
-		weapon->Render();
+		//airplane->Render();
+		//kachujin->Render();
+		//for (UINT i = 0; i < kachujin->GetTransformCount(); ++i)
+		//{
+		//	colliders[i]->Collider->Render();
+		//}
+		//weapon->Render();
 		billboard->Pass(5);
 		billboard->Render();
 	}

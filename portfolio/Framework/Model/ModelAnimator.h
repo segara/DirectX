@@ -2,12 +2,13 @@
 class ModelAnimator
 {
 public:
+	ModelAnimator();
 	ModelAnimator(Shader* shader);
 	~ModelAnimator();
 
 	void Update();
 	void Render();
-private:
+protected:
 	void UpdateTweenMode(UINT instanceIndex);
 	void UpdateBlendMode(UINT instanceIndex);
 public :
@@ -34,7 +35,7 @@ public :
 	void CreateClipTransform(UINT index);
 
 
-private:
+protected:
 	struct ClipTransform
 	{
 		Matrix** Transform;
@@ -62,7 +63,7 @@ private:
 
 	ID3D11Texture2D* texture = NULL;
 	ID3D11ShaderResourceView* srv = NULL;
-private:
+protected:
 	struct KeyframeDesc
 	{
 		int Clip = 0;
@@ -99,7 +100,7 @@ private:
 
 	}tweenDesc[MAX_MODEL_INSTANCE];
 
-private:
+protected:
 	struct BlendDesc
 	{
 		UINT Mode = 0; //1이면 블렌드 모드
@@ -110,7 +111,7 @@ private:
 
 	ConstantBuffer* blendBuffer;
 	ID3DX11EffectConstantBuffer* sBlendBuffer;
-private:
+protected:
 	Shader* shader;
 	Model* model;
 	
@@ -118,10 +119,10 @@ private:
 	Matrix worlds[MAX_MODEL_INSTANCE];
 
 	VertexBuffer* instanceBuffer;
-private:
+protected:
 	Color colors[MAX_MODEL_INSTANCE];
 	VertexBuffer* instanceBuffer_Color;
-private:
+protected:
 		struct CS_InputDesc
 		{
 			Matrix Bone;
@@ -131,7 +132,7 @@ private:
 			Matrix Result;
 		};
 		
-private:
+protected:
 	const float frameRate = 30;
 	float frameTime = 0.0f;
 

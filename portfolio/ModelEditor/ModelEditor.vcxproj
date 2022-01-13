@@ -19,6 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\UnitTest\GetVerticalRaycast.cpp" />
+    <ClCompile Include="..\UnitTest\WorldDemo.cpp" />
+    <ClCompile Include="..\UnitTest\WorldDemo2.cpp" />
+    <ClCompile Include="..\UnitTest\WorldDemo3.cpp" />
     <ClCompile Include="AnimationDemo.cpp" />
     <ClCompile Include="Converter.cpp" />
     <ClCompile Include="ExportFile.cpp" />
@@ -31,6 +35,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\UnitTest\GetVerticalRaycast.h" />
+    <ClInclude Include="..\UnitTest\WorldDemo.h" />
+    <ClInclude Include="..\UnitTest\WorldDemo2.h" />
+    <ClInclude Include="..\UnitTest\WorldDemo3.h" />
     <ClInclude Include="AnimationDemo.h" />
     <ClInclude Include="Converter.h" />
     <ClInclude Include="ExportFile.h" />

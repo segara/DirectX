@@ -22,6 +22,8 @@
     <ClCompile Include="BillboardDemo.cpp" />
     <ClCompile Include="BloomDemo.cpp" />
     <ClCompile Include="BlurDemo.cpp" />
+    <ClCompile Include="CharacterControllDemo.cpp" />
+    <ClCompile Include="CharacterControllDemo\Character.cpp" />
     <ClCompile Include="CubeSkyDemo.cpp" />
     <ClCompile Include="DynamicCubeMapDemo.cpp" />
     <ClCompile Include="GaussianBlurDemo.cpp" />
@@ -30,6 +32,7 @@
     <ClCompile Include="GetMultiBoneDemo.cpp" />
     <ClCompile Include="GetRayCastDemo.cpp" />
     <ClCompile Include="GetVerticalRaycast.cpp" />
+    <ClCompile Include="HeightMapDemo.cpp" />
     <ClCompile Include="InstancingDemo.cpp" />
     <ClCompile Include="InstancingFrameworkDemo.cpp" />
     <ClCompile Include="LightingDemo.cpp" />
@@ -56,11 +59,14 @@
     <ClCompile Include="ThreadDemo.cpp" />
     <ClCompile Include="ViewportDemo.cpp" />
     <ClCompile Include="WeatherDemo.cpp" />
+    <ClCompile Include="WorldDemo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BillboardDemo.h" />
     <ClInclude Include="BloomDemo.h" />
     <ClInclude Include="BlurDemo.h" />
+    <ClInclude Include="CharacterControllDemo.h" />
+    <ClInclude Include="CharacterControllDemo\Character.h" />
     <ClInclude Include="CubeSkyDemo.h" />
     <ClInclude Include="DynamicCubeMapDemo.h" />
     <ClInclude Include="GaussianBlurDemo.h" />
@@ -69,6 +75,7 @@
     <ClInclude Include="GetMultiBoneDemo.h" />
     <ClInclude Include="GetRayCastDemo.h" />
     <ClInclude Include="GetVerticalRaycast.h" />
+    <ClInclude Include="HeightMapDemo.h" />
     <ClInclude Include="InstancingDemo.h" />
     <ClInclude Include="InstancingFrameworkDemo.h" />
     <ClInclude Include="LightingDemo.h" />
@@ -90,6 +97,7 @@
     <ClInclude Include="ThreadDemo.h" />
     <ClInclude Include="ViewportDemo.h" />
     <ClInclude Include="WeatherDemo.h" />
+    <ClInclude Include="WorldDemo.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

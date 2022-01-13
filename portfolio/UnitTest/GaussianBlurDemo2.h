@@ -35,8 +35,8 @@ private:
 	DepthStencil* depthStencil;
 	//post effect시에 viewport를 별도로 만들어서 rtv, dsv, viewport 1:1:1로 대응
 	Viewport* viewport;
-	Render2D* render2D; //2d box 렌더러
-	PostEffect* postEffect;
+	Render2D* render2D; //2d quad 렌더러 (작은화면)
+	PostEffect* postEffect; //2d quad (화면전체)
 
 	Billboard* billboard;
 

@@ -175,7 +175,7 @@ PixelOutput_UseMultiTarget PS_GaussianBlurMultiRenderTarget(VertexOutput input)
     color /= sum;
     
     output.Color1 = float4(color.rgb, 1.0f);
- 
+    //sv_target1¿¡ °á°ú
     return output; 
 }
 
@@ -186,7 +186,7 @@ float4 PS_GaussianCombined(VertexOutput input) : SV_Target
     float4 color1 = GaussianMrt[0].Sample(LinearSampler, input.Uv);
     float4 color2 = GaussianMrt[1].Sample(LinearSampler, input.Uv);
     
-    return float4((color1.rgb + color2.rgb) * 0.5f, 1);
+    return float4((color1.rgb + color2.rgb)*0.5f, 1);
 }
 
 technique11 T0

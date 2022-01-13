@@ -4,8 +4,9 @@
 
 void ExportFile::Initialize()
 {
-	Tank();
-	Kachujin();
+	//Tank();
+	//Kachujin();
+	CharacterDummy();
 }
 
 void ExportFile::Tank()
@@ -83,4 +84,32 @@ void ExportFile::Weapon()
 		conv->ExportMesh(L"Weapon/" + name);
 		SafeDelete(conv);
 	}
+}
+
+void ExportFile::CharacterDummy()
+{
+	Converter* conv = new Converter();
+	conv->ReadFile(L"CharDummy/CharDummy.fbx");
+	conv->ExportMesh(L"CharDummy/Mesh");
+	conv->ExportMaterial(L"CharDummy/Mesh");
+	SafeDelete(conv);
+
+	conv = new Converter();
+	conv->ReadFile(L"CharDummy/Idle.fbx");
+	conv->ExportAnimClip(0, L"CharDummy/Idle");
+	SafeDelete(conv);
+
+	conv = new Converter();
+	conv->ReadFile(L"CharDummy/Jumping.fbx");
+	conv->ExportAnimClip(0, L"CharDummy/Jumping");
+	SafeDelete(conv);
+
+	conv = new Converter();
+	conv->ReadFile(L"CharDummy/Running.fbx");
+	conv->ExportAnimClip(0, L"CharDummy/Running");
+	SafeDelete(conv);
+	conv = new Converter();
+	conv->ReadFile(L"CharDummy/Walking.fbx");
+	conv->ExportAnimClip(0, L"CharDummy/Walking");
+	SafeDelete(conv);
 }

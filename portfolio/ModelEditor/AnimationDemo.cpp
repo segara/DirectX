@@ -11,7 +11,8 @@ void AnimationDemo::Initialize()
 
 	shader = new Shader(L"53_InstancingAnimation.fx");
 
-	Kachujin();
+	//Kachujin();
+	CharacterDummy();
 
 }
 
@@ -36,25 +37,28 @@ void AnimationDemo::Update()
 		ImGui::InputFloat("TweenTime", &tweenTime, 0.01f);
 
 		if (ImGui::Button("Apply"))
-			kachujin->PlayTweenMode(instance, clip, speed, tweenTime);
+			characterDummy->PlayTweenMode(instance, clip, speed, tweenTime);
 	}
 	else
 	{
 		ImGui::InputInt("Instance", (int *)&instance);
 		ImGui::SliderFloat("Alpha", &alpha, 0.0f, 2.0f);
 
-		kachujin->SetBlendAlpha(instance, alpha);
+		characterDummy->SetBlendAlpha(instance, alpha);
 
 		if (ImGui::Button("Apply"))
-			kachujin->PlayBlendMode(instance, 0, 1, 2);
+			characterDummy->PlayBlendMode(instance, 0, 1, 2);
 	}
 
 	if (kachujin != NULL)
 		kachujin->Update();
+	if (characterDummy != NULL)
+		characterDummy->Update();
 }
 void AnimationDemo::Render()
 {
 	if (kachujin != NULL) kachujin->Render();
+	if (characterDummy != NULL) characterDummy->Render();
 }
 
 void AnimationDemo::Kachujin()
@@ -76,4 +80,25 @@ void AnimationDemo::Kachujin()
 	}
 	kachujin->UpdateTransforms();
 	kachujin->Pass(2);
+}
+
+void AnimationDemo::CharacterDummy()
+{
+	characterDummy = new ModelAnimator(shader);
+	characterDummy->ReadMesh(L"CharDummy/Mesh");
+	characterDummy->ReadMaterial(L"CharDummy/Mesh");
+
+	characterDummy->ReadClip(L"CharDummy/Idle");
+	characterDummy->ReadClip(L"CharDummy/Walking");
+	characterDummy->ReadClip(L"CharDummy/Running");
+	characterDummy->ReadClip(L"CharDummy/Jumping");
+	
+	for (float x = -50; x <= 50; x += 2.5f)
+	{
+		Transform* transform = characterDummy->AddTransform();
+		transform->Position(x, 0, -5);
+		transform->Scale(0.01f, 0.01f, 0.01f);
+	}
+	characterDummy->UpdateTransforms();
+	characterDummy->Pass(2);
 }

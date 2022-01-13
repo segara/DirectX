@@ -17,4 +17,5 @@ private:
 	void Tank();
 	void Kachujin();
 	void Weapon();
+	void CharacterDummy();
 };
